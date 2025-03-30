@@ -1,0 +1,9 @@
+<?php
+    error_reporting(0);
+    error_reporting(E_ALL);
+    include_once "../../classes/cls_tabelausuario.php";
+
+    $object = new cls_tabelausuario();
+    $result = $object->getAllUserType();
+    echo json_encode($result);
+?>
