@@ -305,6 +305,8 @@
             // }
 
         }
+
+        public function updateUser ($nome, $codigo_acesso, $senha, $tipo_usuario_id,$status_ativo, $municipio_id, $agencia_id) {}
         
 
         public function getCursor () {
