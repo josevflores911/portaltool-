@@ -1,22 +1,24 @@
-$(document).ready(function() {
+$(document).ready(function () {
+    
+    let div_program = $(".generic");
+
     $.ajax({
         url: 'modules/ler_tabelausuarios.php',
         type: 'POST',
         success: function(data) {
-            console.log(data);
+            // console.log(data);
             var resp = JSON.parse(data);
             var response = resp.Data;
 
             var tbodyContent = '';
 
-            // Recorre los datos y genera las filas de la tabla
             response.forEach(function(item, index) {
                 var row = `
                     <tr>
                         <td>${index + 1}</td>
                         <td>${item.nome_usuario}</td>
                         <td>${item.codigo_usuario}</td>
-                        <td>${item.status_ativo}</td>
+                        <td>${item.status_ativo=="S" ?"Ativo": "Inativo"}</td>
                         <td>${item.tipo_usuario}</td>
                         <td>${item.estado_usuario}</td>
                         <td>${item.municipio_usuario}</td>
@@ -25,7 +27,7 @@ $(document).ready(function() {
                         <td>
                             <div style="display:flex; flex-direction:row; justify-content:space-around">
                                 <div>
-                                    <a href="views/edit-view.php?id=${item.id_usuario}" class="btn btn-success btn-sm">Editar</a>
+                                    <a type="button" class="btn btn-success btn-sm btn-editar" data-id="${item.id_usuario}">Editar</a>
                                 </div>
                                 <div>
                                     <form action="services/controller.php" method="POST" class="d-inline">
@@ -41,11 +43,67 @@ $(document).ready(function() {
                 tbodyContent += row;
             });
 
-            // Insertar el contenido generado en el tbody de la tabla
             $('tbody').html(tbodyContent);
         },
         error: function(xhr, status, error) {
             console.error('Error:', error);
         }
+    });
+
+    // $(document).on("click", ".btn-editar", function(e) {
+    //     e.preventDefault();
+    //     e.stopPropagation();
+
+    //     var userId = $(this).data('id');
+
+    //     // Obtener los datos del usuario por ID
+    //     $.get('views/vi_criarusuario.php', { id: userId }, function(data) {
+    //         var userData = JSON.parse(data);
+    //         console.log(userData);
+
+    //         // Llenar los campos del formulario con los datos del usuario
+    //         $('#nome').val(userData.nome_usuario);
+    //         $('#codigo').val(userData.codigo_usuario);
+    //         $('#senha').val(userData.senha_usuario);
+    //         $('#tipo_usuario').val(userData.tipo_usuario); // Asegúrate que esta opción esté en el select
+    //         $('#estado').val(userData.estado_usuario); // Asegúrate que esta opción esté en el select
+    //         $('#municipio').val(userData.municipio_usuario); // Asegúrate que esta opción esté en el select
+    //         $('#agencia').val(userData.agencia_usuario); // Asegúrate que esta opción esté en el select
+
+    //         // Mostrar el modal
+    //         let modal = $(".modal");
+    //         modal.modal('show');
+    //     });
+    // });
+
+
+    $(document).on("click", ".btn-editar", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var userId = $(this).data('id'); //con el id hay que hacer un get by id para hacer el step 2
+
+        //deveria ser editarusuario
+        $.get('views/vi_criarusuario.html', { id: userId }, function (data) {
+            //  var userData = JSON.parse(data);
+
+     
+            //step 2
+
+            // $('#nome').val(userData.nome_usuario);
+            // $('#codigo').val(userData.codigo_usuario);
+            // $('#senha').val(userData.senha_usuario);
+            // $('#tipo_usuario').val(userData.tipo_usuario); // Asegúrate que esta opción esté en el select
+            // $('#estado').val(userData.estado_usuario); // Asegúrate que esta opción esté en el select
+            // $('#municipio').val(userData.municipio_usuario); // Asegúrate que esta opción esté en el select
+            // $('#agencia').val(userData.agencia_usuario); // Asegúrate que esta opción esté en el select
+
+            
+            div_program.html('');
+            div_program.html(data);
+            let modal= $(".modal");
+            modal.modal('show');
+           
+        });
     });
 });

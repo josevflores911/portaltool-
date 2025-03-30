@@ -84,7 +84,7 @@ $(document).ready(() => {
         var id = $(ev.target).attr("id");
        var v_opt = {
            "menu-sistem-1": "vi_acessos.php",
-           "menu-sistem-8": "vi_tabelausuario.php",
+           "menu-sistem-8": "vi_tabelausuario.html",
         }
                      
         if (v_opt[id] !== undefined) {
