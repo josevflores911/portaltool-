@@ -1,0 +1,88 @@
+#show_fields {
+    position: fixed;
+    float: left;
+    top:5rem; 
+    left:66%;
+    /*height:30rem!important;*/ 
+    width:25rem;
+    overflow:hidden;
+    border-collapse: collapse;
+}
+
+#show_types {
+    position: fixed;
+    float: left;
+    top:5rem; 
+    left:36%;
+    height:35rem!important; 
+    width:25rem;
+    overflow:hidden;
+    border-collapse: collapse;
+}
+
+
+.generic {
+    display: block;
+    top:3.5%;
+    left: 12%;
+    max-width: 90rem;
+    max-height: fit-content;
+    z-index: 2000;
+}
+
+.card-trasparent {
+    background: transparent;
+    color: #fff;
+}
+
+.card-body input[type = "text"], select.selectpicker {
+  background: #212529;
+  border:0;
+  border-radius: 5px;
+  outline: none;
+  color: #d6d6d6;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out; 
+}
+
+.tb_sefaz>tfoot>tr>td {
+    position:absolute;
+    bottom:0;
+    height: 0.8rem;
+    width:100%;
+}
+
+.tb_sefaz>tbody {
+    border-top: none;
+    border-bottom: none;
+}
+.tb_sefaz>tbody>tr>td:nth-child(5) {
+    padding-right:2em!important;
+}
+
+.tb_sefaz>tbody>tr>td:nth-child(6) {
+    text-align: center;
+}
+
+.tb_sefaz>tbody>tr:hover {
+    background-color: rgba(58, 56, 56,0.5) !important;
+    color: yellowgreen !important;
+}
+
+
+.tb_sefaz>thead>tr>th {
+    position: relative;
+    background-color: rgb(58, 56, 56) !important;
+    overflow: hidden;
+    height: 0.8rem;
+}
+
+button.modal-close {
+    background: transparent;
+    border: none;
+    color: #f00;
+    font-size: xx-large;
+}

@@ -1,0 +1,65 @@
+
+.generic {
+    display: block;
+    top:3.5%;
+    left: 12%;
+    max-width: 90rem;
+    max-height: fit-content;
+    z-index: 2000;
+}
+
+.card-trasparent {
+    background: transparent;
+    color: #000;
+}
+
+.card-body input[type = "text"], select.selectpicker {
+  background: transparent;
+  border:0;
+  border-radius: 5px;
+  outline: none;
+  color: #000;
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    transition: all .2s ease-out; 
+}
+
+.table-responsive {
+    overflow: auto;
+    width: 100vw;
+    height:81.3vh;
+}
+
+.tb_municipios {
+    display: block;
+    width: 145%;
+    height: 120%;
+    border-collapse: collapse;
+    font-size: 10pt;
+}
+
+.tb_municipios>thead>tr>th{
+    position:sticky;
+    background-color: darkblue;
+    top: 0;
+    z-index: 99999;
+}
+.tb_municipios>tfoot>tr>td {
+    position:absolute;
+    bottom:0;
+    height: 0.8rem;
+    width:100%;
+}
+
+.tb_municipios>tbody {
+    display:table-layout;
+    border-top: none;
+    border-bottom: none;
+    overflow-y: auto;
+    background-color: transparent !important;
+    height: Calc(100vh - 2.8rem) !important;
+    max-height: fit-content;
+    z-index:1;
+}

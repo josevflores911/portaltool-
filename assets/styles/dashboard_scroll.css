@@ -1,0 +1,135 @@
+
+.containerx {
+  width: 100%;
+  height: 70px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  background-color: #f3f5f6;
+  position: relative;
+  display: block;
+  overflow: hidden;
+}
+
+.container--fixed {
+  position: relative;
+  height: -webkit-fill-available;
+  text-align: center;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  display: block;
+  position: relative;
+  white-space: nowrap;
+  transform: translate3d(0, 0, 0);
+  padding: 0 8px;
+}
+
+.container--fixed::-webkit-scrollbar {
+  display: none;
+}
+
+.container--fixed[data-overflowing="both"] ~ .pNavBtn--left,
+.container--fixed[data-overflowing="left"] ~ .pNavBtn--left {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.container--fixed[data-overflowing="both"] ~ .pNavBtn--right,
+.container--fixed[data-overflowing="right"] ~ .pNavBtn--right {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.containerx .tag {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 8px;
+  overflow: hidden;
+  padding: 8px 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+  box-sizing: border-box;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.containerx .tag .icon {
+  display: inline-block;
+  line-height: 1em;
+  font-size: medium;
+  font-weight: normal;
+}
+
+.containerx .tag .title {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  display: inline-block;
+  color: #fff;
+}
+
+.inline {
+  margin: 0 auto;
+  /* float: left; */
+  display: inline-block;
+  transition: transform .2s ease-in-out;
+}
+
+.no-transition {
+  transition: none;
+}
+
+.pNavBtn {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+  background-color: rgba(229, 229, 229, 0.8);
+  -webkit-transition: opacity 0.5s, visibility 0.5s;
+  transition: opacity 0.5s, visibility 0.5s;
+  bottom: 0;
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 72px;
+  width: 36px;
+  box-shadow: -1px 0 2px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pNavBtn > div {
+  position: relative;
+}
+
+.pNavBtn:focus {
+  outline: 0;
+}
+
+.pNavBtn--left {
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  border-bottom-right-radius: 36px;
+  border-top-right-radius: 36px;
+}
+
+.pNavBtn--right {
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  border-bottom-left-radius: 36px;
+  border-top-left-radius: 36px;
+}
+
+.pNavBtn--icon {
+  width: 14px;
+  height: 22px;
+  fill: #000;
+}

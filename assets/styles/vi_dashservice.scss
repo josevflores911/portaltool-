@@ -1,0 +1,43 @@
+.card {
+  background-color: transparent !important;
+}
+
+h5,h6, label, .modal-close {
+  color: white;
+}
+
+input{
+  font-family: Verdana;
+  font-size: 10px;
+  height: 1.3rem;
+  border-radius: 2px;
+}
+
+.input-group-prepend ,
+.input-group-text {
+  background-color: transparent;
+  border: 0px;
+  color: white;
+  font-size: small;
+}
+
+button.aplicar, button.limpar {
+  text-align: center;
+  display: flex;
+  position: relative;
+  height: 1.85rem;
+  width: 4.25rem !important;
+  color: #000;
+  font-size: 9px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 0;
+  margin: auto;
+  font-weight: bold;
+  cursor:  pointer !important;
+  border-radius: 0.8rem;
+  transition: box-shadow 0.3s linear;
+  align-items: center;
+  justify-content: center; 
+}
+
+

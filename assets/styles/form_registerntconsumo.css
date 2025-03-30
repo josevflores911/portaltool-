@@ -1,0 +1,24 @@
+button.bt-limpar {
+    display: block;
+    position: relative;
+    width: 4.6rem!important;
+    height: 1.85rem!important;
+    font-size: 8pt;
+    font-weight: bold;
+    padding-top: 0.3em;
+}
+
+button.bt-gravar {
+    display: block;
+    position: relative;
+    width: 4.6rem!important;
+    height: 1.85rem!important;
+    font-size: 8pt;
+    font-weight: bold;
+    padding-top: 0.3em;
+}
+
+.no-border {
+    border: none;
+}
+

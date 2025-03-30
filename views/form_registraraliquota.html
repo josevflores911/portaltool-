@@ -1,0 +1,165 @@
+<head>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/form_aliquotas.js"></script>
+    <link rel="stylesheet" href="assets/styles/vi_padrao.scss">
+    <link rel="stylesheet" href="assets/styles/form_aliquotas.scss">
+</head>
+<style>
+
+</style>
+<div class="modal fade" id="form-aliquota" data-bs-keyboard="false"  data-id="{id_empresa}" data-user="{id_user}" data-bs-backdrop="static" role="dialog" aria-labelledby="tela_empresas" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <div class="modal-title text-white text-center flex-start">
+                    <label id="title_doc">Registrar/Alterar alíquotas</label>
+                </div>
+                <button type="button" class="modal-close text-white" data-bs-dismiss="modal"><small>&times;</small></button>
+            </div>
+            <div class="modal-body bg-dark" style="overflow-y:auto;">
+                <table class="table table-responsive table-content-fluid">
+                    <tbody>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='sel_estado' class="form-control-label borderless text-white">Selecione o Estado</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <select id="sel_estado" class="select-picker sm-4">
+                                    <option value="">Selecione o Estado</option>
+                                    <option value="AC" class="sm-auto fi">Acre</option>
+                                    <option value="AL" class="sm-auto fi">Alagoas</option>
+                                    <option value="AP" class="sm-auto fi">Amapá</option>
+                                    <option value="AM" class="sm-auto fi">Amazonas</option>
+                                    <option value="BA" class="sm-auto fi">Bahia</option>
+                                    <option value="CE" class="sm-auto fi">Ceará</option>
+                                    <option value="DF" class="sm-auto fi">Distrito Federal</option>
+                                    <option value="ES" class="sm-auto fi">Espírito Santo</option>
+                                    <option value="GO" class="sm-auto fi">Goiás</option>
+                                    <option value="MA" class="sm-auto fi">Maranhão</option>
+                                    <option value="MT" class="sm-auto fi">Mato Grosso</option>
+                                    <option value="MS" class="sm-auto fi">Mato Grosso do Sul</option>
+                                    <option value="MG" class="sm-auto fi">Minas Gerais</option>
+                                    <option value="PA" class="sm-auto fi">Pará</option>
+                                    <option value="PB" class="sm-auto fi">Paraíba</option>
+                                    <option value="PI" class="sm-auto fi">Piauí</option>
+                                    <option value="PR" class="sm-auto fi">Paraná</option>
+                                    <option value="PE" class="sm-auto fi">Pernambuco</option>
+                                    <option value="RJ" class="sm-auto fi">Rio de Janeiro</option>
+                                    <option value="RN" class="sm-auto fi">Rio Grande do Norte</option>
+                                    <option value="RS" class="sm-auto fi">Rio Grande do Sul</option>
+                                    <option value="RO" class="sm-auto fi">Rondônia</option>
+                                    <option value="RR" class="sm-auto fi">Roraima</option>
+                                    <option value="SC" class="sm-auto fi">Santa Catarina</option>
+                                    <option value="SE" class="sm-auto fi">Sergipe</option>
+                                    <option value="SP" class="sm-auto fi">São Paulo</option>
+                                    <option value="TO" class="sm-auto fi">Tocantins</option>
+                                    
+                                </select></td>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='sel_municipio' class="form-control-label borderless text-white">Selecione o Município</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <select id="sel_municipio" class="select-picker sm-auto"></select>
+                            </td>
+                        </tr>
+
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='sel_grupo' class="form-control-label borderless text-white">Selecione o grupo de serviço</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <select id="sel_grupo" class="select-picker sm-auto"></select>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='sel_servico_federal' class="form-control-label borderless text-white">Sel. Serviço Federal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <select id="sel_servicofederal" class="select-picker sm-auto gy-md-5"></select>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='te_servfederal' class="form-control-label borderless text-white">Descr. Federal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <textarea type="text" class="form-control input-md-5" rows="3" cols="50" id="te_servfederal"></textarea>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='vl_aliquotaIR' class="form-control-label borderless text-white">% Alíquota IR </label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="text" id="vl_aliquotaIR" class="form-control input-md" size="4" maxlength="4" title="Percentual da alíquota IRRF"></td>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='vl_aliquotaINSS' class="form-control-label borderless text-white">% Alíquota INSS</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="text" id="vl_aliquotaINSS" class="form-control input-md" size="4" maxlength="4" title="Percentual da alíquota INSS"></td>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='vl_aliquotaPCC' class="form-control-label borderless text-white">% Alíquota PCC</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="text" id="vl_aliquotaPCC" class="form-control input-md" size="4" maxlength="4" title="Percentual da alíquota PIS/COFINS/CSLL"></td>
+                            </td>
+                        </tr>
+
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='te_resptribfederal' class="form-control-label borderless text-white">Resp. Trib. Federal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <textarea type="text" class="form-control input-md-5" rows="4" cols="50" id="te_resptribfederal"></textarea>
+                            </td>
+                        </tr>
+
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='dt_inivigenciafederal' class="form-control-label borderless text-white">Vigência do Tribs. Federal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="date" class="form-control input-sm" id="dt_inivigencia_federal">&nbsp;&nbsp;até&nbsp;&nbsp;
+                                <input type="date" class="form-control input-sm" id="dt_fimvigencia_federal"></td>
+                            </td>
+                        </tr>
+
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='cd_servmuni' class="form-control-label borderless text-white">Cód. Serviço Municipal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="text" class="form-control input-sm" size="8" maxlength="8" title="Código serviço municipal" id="cd_servmuni"></td>
+                            </td>
+                        </tr>
+
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='te_servMunicipal' class="form-control-label borderless text-white">Descr. Municipal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <textarea type="text" class="form-control input-md-5" rows="3" cols="50" id="te_servMunicipal"></textarea>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='vl_aliquota' class="form-control-label borderless text-white">% Alíquota Municipal </label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="text" class="form-control input-md" size="4" maxlength="4" title="Percentual da alíquota federal"></td>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='dt_inivigenciamuni' class="form-control-label borderless text-white">Vigência do Tribs. Municipal</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <input type="date" class="form-control input-sm" id="dt_inivigenciamuni">&nbsp;&nbsp;até&nbsp;&nbsp;
+                                <input type="date" class="form-control input-sm" id="dt_fimvigenciamuni"></td>
+                            </td>
+                        </tr>
+                        <tr scope="row" class="justify-content-between">
+                            <td scope="col" class="col col-sm-8 br-1"><label for='te_resptributaria' class="form-control-label borderless text-white">Resp. Tributária</label></td>
+                            <td scope="col" class="col col-sm-12 br-2">
+                                <textarea type="text" class="form-control input-md-5" rows="4" cols="50" id="te_resptributaria"></textarea>
+                            </td>
+                        </tr>
+             
+                    </tbody>
+                </table>
+            </div>
+             <!-- Modal footer -->
+             <div class="modal-footer d-inline-flex" style="width:100%;">
+                <div class="bg-dark flex-start">
+                    <label class="text-white" style="position:relative;float:left;left:0px;" id="lbl_message">&nbsp;</label>    
+                </div>
+                <button type="button" class="btn btn-primary" id='limpar' style="float:right;">Limpar&nbsp;</button>
+                <button type="button" class="btn btn-success" id='gravar' style="float:right;">Gravar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

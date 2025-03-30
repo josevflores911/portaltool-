@@ -1,0 +1,58 @@
+<head>
+    <!-- scss -->
+    <meta http-equiv="Pragma" content="no-cache, no-store">
+    <meta name="version" content="1.0.3"/>
+    <link rel="stylesheet" href="assets/styles/vi_padrao.scss">
+    <link rel="stylesheet" href="assets/styles/form_alteraobs.scss">
+    <script src="scripts/form_alteraobs.js"></script>
+</head>
+
+<div class="modal fade" id="show_campoobs" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="show_seltypes" aria-hidden="true">
+    <div class="modal-dialog modal-md-30">
+        <div class="modal-content bg-dark content-fluid">
+            <div class="modal-header">
+                <h5 class="text-white">Altera Campo Observação da NFSE</h5>
+                <button type="button" class="modal-close text-white" data-bs-dismiss="modal"><small>&times;</small></button>
+            </div>
+            <div class="modal-body bg-transparent">
+                <table class="table table-responsive table-content-fluid tb_observacao table-borderless">
+                    <tbody>
+                        <tr scope="row" class="row row-group justify-content-between">
+                            <td scope="col" class="col col-sm-5 br-1 float-start" style="position:relative; left:-3.1em;">
+                                <label class="bg-dark text-white form-control borderless"  style="text-align:left;"><b>Número NNFS</b></label>
+                            </td>
+                            <td scope="col" class="col col-sm-6 br-1 float-start" style="position:relative; left:-2.8em;">
+                                <input type="text" class="bg-dark text-white form-control" id="nota_fiscal" readonly value="99999999999999999999" />
+                            </td>
+                            
+                        </tr>
+                        <tr scope="row" class="row row-group justify-content-between">
+                            <td class="col" class="col col-sm-5 br-1 float-start" style="position:relative; left:-3.2em;">
+                                <label for ='observacao' class="bg-dark text-white form-control borderless" style="text-align:left;"><b>Campo Observação</b></label>
+                            </td>
+                            <td class="col" class="col col-sm-8 br-1 float-start" style="position:relative; left:-2.5em;">
+                                <textarea id='observacao' class="bg-white text-dark" rows="5" cols="58" ></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer bg-dark">
+                <table class="table table-responsive table-content-fluid table-borderless">
+                    <tbody>
+                        <tr scope="row row-fluid float-start">
+                            <td scope="col" class="col col-sm-7 float-left">
+                                <label id="lbl_message" class="form-control borderless bg-dark text-white"></label>
+                            </td>
+                            <td scope="col" class="col col-sm-12 float-end" style="position: relative;float:right">
+                                <button type="button" class="form-control btn btn-primary text-white" id="gravar-obs">Gravar</button>
+                                <button type="button" class="form-control btn btn-danger text-white" id="cancelar-obs">Cancelar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+               
+            </div>
+        </div>
+    </div>
+</div>

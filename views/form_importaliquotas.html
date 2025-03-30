@@ -1,0 +1,39 @@
+<head>
+    <!-- scss -->
+    <meta http-equiv="Pragma" content="no-cache, no-store">
+    <meta name="version" content="1.0.3"/>
+    <link rel="stylesheet" href="assets/styles/form_importaliquotas.scss">
+    <script src="scripts/form_importaliquotas.js"></script>
+</head>
+
+<div class="modal fade" id="form_importaliquotas" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="show_seltypes" aria-hidden="true">
+    <div class="modal-dialog modal-md-15">
+        <div class="modal-content bg-dark content-fluid">
+            <div class="modal-header">
+                <h5 class="text-white"><label id='lb_aliquota' class="bg-dark text-white">Importação de alíquotas municipais</label></h5>
+                <button type="button" class="modal-close text-white" data-bs-dismiss="modal"><small>&times;</small></button>
+            </div>
+            <div class="modal-body bg-transparent">
+                <div class="row row-fluid justify-content-between">
+                    <div class="col col-md-6 float-start br-1">
+                        <label for="input_aliquota" class="bg-dark text-white"><b>Selecione o arquivo</b></label>
+                    </div>
+                    <div class="col col-sm-6 float-start br-2">
+                        <input type="file" id="file" style="display:none">
+                        <input type="text" class="form-control input-sm" style="float:left">
+                    </div>
+                </div>
+                <p></p>
+                <div class="row row-fluid justify-content-between">
+                    <div class="col col-md-6 float-start br-1">
+                        <label for="" class="bg-dark text-white" id="lbl_message" style="float:left;"></label>
+                    </div>
+                    <div class="col col-md-6 float-end br-2">
+                        <button class="btn btn-primary text-center text-white" id="gravar" title="Gravar em lote">Gravar</button>
+                        <button class="btn btn-secondary text-center text-white" data-bs-dismiss="modal" title="Cancelar">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

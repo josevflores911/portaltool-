@@ -1,0 +1,72 @@
+<head>
+    <script src="scripts/form_logs.js"></script>
+    <link rel="stylesheet" href="assets/styles/form_logs.scss">
+</head>
+<div class="modal fade" id="show-log" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="show-log" aria-hidden="true">
+    <div class="modal-dialog modal-xl"">
+        <div class="modal-content bg-dark content-fluid">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="text-white">Logs da nota&nbsp;<label class='text-white lbl_nota'></label> </h4>
+                
+                <button type="button" class="modal-close text-white" data-bs-dismiss="modal"><small-2>x</small-2></button>
+            </div>
+            <div class="waiting-log">
+                <img src='assets/images/spin-wait.gif' width='32px' alt='waiting'>
+            </div>
+            
+            <div class="modal-body bg-transparent" style="height:600px; max-height:650px;">
+                <table class="table tb-log table-responsive borderless">
+                    <thead class="text-center text-white justify-content-between">
+                        <tr scope="row">
+                            <th scope="col" class="br-1">Usuário</th>
+                            <th scope="col" class="br-1">Data/Hora</th>
+                            <th scope="col" class="br-1">Operação</th>
+                            <th scope="col" class="br-1">Tabela</th>
+                            <th scope="col" class="br-1">Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-dark">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td scope='row' colspan='5'>
+                                <div class="d-flex justify-content-between rodape">
+                                    <div class="p-1">&nbsp;</div>
+                                    <div class="p-2">
+                                        <div class="card card-trasparent">
+                                            <div class="card-body">
+                                                <img src="assets/images/first.png" width='16px' alt='first' id='first'>
+                                                <img src="assets/images/prev.png" width='16px' alt='prev' id='prev'>
+                                                <input type='text' class='rounded text-white text-center bg-dark' value='1' size='3' maxlength='3' id="sel-page">
+                                                <img src="assets/images/prev.png" width='16px' alt='next' id='next' class='rotate-180'>
+                                                <img src="assets/images/first.png" width='16px' alt='last' id='last' class='rotate-180'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-2">
+                                        <div class="card card-trasparent">
+                                            <div class="card-body">
+                                                <label for="sel-linhas" class="text-white">Linhas por página</label>
+                                                <select class="selectpicker text-center" id="sel-linhas">
+                                                    <option value="8">8</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20" selected>20</option>
+                                                    <option value="25">25</option>
+                                                    <option value="30">30</option>
+                                                    <option value="50">50</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-1">&nbsp;</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

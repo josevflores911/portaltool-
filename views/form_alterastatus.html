@@ -1,0 +1,46 @@
+<head>
+    <!-- scss -->
+    <meta http-equiv="Pragma" content="no-cache, no-store">
+    <meta name="version" content="1.0.3"/>
+    <link rel="stylesheet" href="assets/styles/form_alterastatus.scss">
+    <script src="scripts/form_alterastatus.js"></script>
+</head>
+<div class="modal fade" id="show_alterastatus" data-bs-keyboard="false" data-bs-backdrop="static" role="dialog" aria-labelledby="show_seltypes" aria-hidden="true">
+    <div class="modal-dialog modal-md-15">
+        <div class="modal-content bg-dark content-fluid">
+            <div class="modal-header">
+                <h5 class="text-white">Altera Status da nota</h5>
+                <button type="button" class="modal-close" data-bs-dismiss="modal"><small>&times;</small></button>
+            </div>
+            <div class="modal-body bg-transparent">
+                <div class="row row-group">
+                    <div class="col col-sm-3 flex-start">
+                        <label class="form-control text-white bg-dark" id="cd_status"></label>&nbsp;-&nbsp;
+                    </div>
+                    <div class="col col-sm-8 flex-start">
+                        <label class="form-control text-white bg-dark" id="te_status"></label>&nbsp;-&nbsp;
+                    </div>
+                </div>
+                <div class="row row-fluid">
+                    <div class="col col-mb-4 flex-start">
+                        <label for="text_status" class="bg-dark text-white form-control-label" style="float:left;"><b>Informe o motivo da alteração do status</b></label>
+                    </div>
+                </div>
+                <div class="row row-fluid flex-start">
+                    <textarea id="te_motivo" class="form-control-textarea bg-white text-dark rounded bordered" rows="8" cols="75"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer bg-dark text-white">
+                <div class="row row-group justify-content-between">
+                    <div class="col col-md-6 float-start br-1">
+                        <label for="" class="bg-dark text-white" id="lbl_message" style="float:left;"></label>
+                    </div>
+                    <div class="col col-md-6 float-end br-2">
+                        <button class="btn btn-primary text-center text-white" id="gravar_status" title="Alterar o status da nota">Gravar</button>
+                        <button class="btn btn-danger text-center text-white" data-bs-dismiss="modal" id="cancelar_status" title="Cancela a edição">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
