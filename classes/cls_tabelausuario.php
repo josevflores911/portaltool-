@@ -23,6 +23,7 @@
                             u.id_user AS id_usuario,
                             u.nm_user AS nome_usuario,
                             u.cd_acesso AS codigo_usuario,
+                             u.cs_ativo AS status_ativo,
                             u.cd_currposition AS tipo_usuario,
                             m.nm_estado AS estado_usuario,
                             m.nm_muni AS municipio_usuario,

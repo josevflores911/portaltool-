@@ -1,57 +1,27 @@
-// $(document).ready(function(evt) {
-    
-//     // let sel_statusmuni = $("select#sel_statusmuni");
-//     console.log("herea")
-            
-//     $.ajax({
-//         url: 'modules/ler_tabelausuarios.php',
-//         type: 'POST',
-//         success: function (data) {
-//             console.log("here")
-//             console.log(data)
-//             // var resp = JSON.parse(data);
-//             // var error = resp.Error;
-//             // var response = resp.Data;
-//             // if (error == '0') {
-//             //     sel_statusmuni.empty();
-//             //     response.forEach((elem,ix) => {
-//             //         if (ix == 0) {
-//             //             sel_statusmuni.append(`<option value="0" selected>Todos</option>`);
-//             //         }
-//             //         sel_statusmuni.append(`<option value="${elem.cd_status}">${elem.te_descricao}</option>`);
-//             //     });
-//             // }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error('Error:', error);
-//         }
-//     });
-// });
-
 $(document).ready(function() {
-  
     $.ajax({
         url: 'modules/ler_tabelausuarios.php',
         type: 'POST',
         success: function(data) {
-
+            console.log(data);
             var resp = JSON.parse(data);
             var response = resp.Data;
 
             var tbodyContent = '';
 
+            // Recorre los datos y genera las filas de la tabla
             response.forEach(function(item, index) {
                 var row = `
                     <tr>
                         <td>${index + 1}</td>
                         <td>${item.nome_usuario}</td>
                         <td>${item.codigo_usuario}</td>
+                        <td>${item.status_ativo}</td>
                         <td>${item.tipo_usuario}</td>
                         <td>${item.estado_usuario}</td>
                         <td>${item.municipio_usuario}</td>
                         <td>${item.agencia_usuario}</td>
-                        <td>01/01/2023</td> <!-- Suponiendo una fecha de ejemplo -->
-                        <td>01/01/2024</td> <!-- Suponiendo una fecha de ejemplo -->
+                        
                         <td>
                             <div style="display:flex; flex-direction:row; justify-content:space-around">
                                 <div>

@@ -1,0 +1,25 @@
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Estilo para el tbody con scroll */
+table tbody {
+    display: block;
+    max-height: 400px; /* Ajusta la altura según lo que desees */
+    overflow-y: auto;
+    width: 100%;
+}
+
+/* Asegurarse de que los encabezados y las filas del tbody estén alineados */
+table thead, table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word; 
+}

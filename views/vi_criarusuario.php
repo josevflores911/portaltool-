@@ -1,5 +1,9 @@
+<head>
+    <link rel="stylesheet" href="assets/styles/modalcriarusuario.css">
+</head>
+
 <!-- Modal -->
-<div class="modal fade" id="criar_usuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade custom-modal" id="criar_usuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
    <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
