@@ -240,11 +240,17 @@
         }
 
 //
-        public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $status_ativo, $agencia_id) {
+        public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $agencia_id) {
             if (self::$conn) {
                 self::$connected = TRUE;
                 self::$conn = parent::$conn;
 
+                $email='a@a.com';//3
+                $idarea=6;//4  de 1 ate 8
+                $cd_matricula=12;//5
+                $fecha_hardcodeadainiyfim = '2025-03-30';
+                $hora_inicio_jornada  =  '08:00:00';
+                $cd_token = '201sa';//just 6
 
                 self::$conn->begin_transaction();
 
@@ -252,16 +258,21 @@
                     // Primer INSERT: Insertar en tbusers
                     $query1 = "INSERT INTO `tbusers` (
                                 `cd_acesso`, 
-                                `nm_user`, 
-                                `te_pwd`, 
+                                `nm_user`,
+                                `te_email`, 
                                 `id_area`, 
-                                `cd_currposition`, 
-                                `cs_ativo`
+                                `cd_matricula`, 
+                                `hr_inicio_jornada`, 
+                                `hr_fim_jornada`, 
+                                `cd_token`, 
+                                `te_pwd`, 
+                                `cd_currposition`
+                                
                             ) VALUES (
-                                ?, ?, ?, ?, ?, ?
+                                ?, ?, ?, ?, ?,?,?,?,?,?
                             )";
                     $stmt1 = self::$conn->prepare($query1);
-                    $stmt1->bind_param("ssssis", $codigo_acesso, $nome, $senha, $tipo_usuario, $status_ativo);
+                    $stmt1->bind_param("sssissssss", $codigo_acesso, $nome,$email,$idarea,$cd_matricula,$hora_inicio_jornada,$hora_inicio_jornada,$cd_token, $senha, $tipo_usuario);
                     $stmt1->execute();
                     $last_user_id = self::$conn->insert_id; // Obtener el ID del usuario insertado
 
@@ -278,17 +289,16 @@
                     $query3 = "INSERT INTO `tbusersxmunicipios` (
                                 `id_user`, 
                                 `id_agenciaxmunicipio`, 
-                                `cs_visible`, 
                                 `cd_currposition`
                             ) VALUES (
-                                ?, ?, ?, ?
+                                ?, ?,  ?
                             )";
                     $stmt3 = self::$conn->prepare($query3);
-                    $stmt3->bind_param("iiss", $last_user_id, $last_agencia_id, $status_ativo, $tipo_usuario);
+                    $stmt3->bind_param("iis", $last_user_id, $last_agencia_id, $tipo_usuario);
                     $stmt3->execute();
 
 
-                    self::$conn->commit();
+                    // self::$conn->commit();
 
                     return array("Success" => "User saved successfully");
 
