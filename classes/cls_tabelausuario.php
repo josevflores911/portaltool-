@@ -65,24 +65,32 @@
                                         t.indice,
                                         t.id_usuario,
                                         t.nome_usuario,
-                                      
+                                        t.senha,     
                                         t.codigo_usuario,
                                         t.status_ativo,
                                         t.tipo_usuario,
                                         t.estado_usuario,
                                         t.municipio_usuario,
+                                        t.id_municipio,
+                                        t.id_agenciaxmunicipio,
+                                        t.id_agencia,
                                         t.agencia_usuario
+                                       
                                     FROM (
                                         SELECT 
                                             ROW_NUMBER() OVER (ORDER BY u.id_user ASC) AS indice,
                                             u.id_user AS id_usuario,
                                             u.nm_user AS nome_usuario,
-                                          
+                                            u.te_pwd AS senha,
                                             u.cd_acesso AS codigo_usuario,
                                             u.cs_ativo AS status_ativo,
                                             u.cd_currposition AS tipo_usuario,
                                             m.nm_estado AS estado_usuario,
                                             m.nm_muni AS municipio_usuario,
+											m.id_municipio as id_municipio,
+                                           -- a.id_agenciaxmunicipio as id_agenciaxmunicipio,
+                                            um.id_userxmunicipio as id_agenciaxmunicipio,
+                                            a.id_agencia As id_agencia,
                                             a.nm_agencia AS agencia_usuario
                                         FROM 
                                             tbusers u
@@ -231,82 +239,139 @@
                         }
         }
 
+//
+        public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $status_ativo, $agencia_id) {
+            if (self::$conn) {
+                self::$connected = TRUE;
+                self::$conn = parent::$conn;
 
-        public function saveUser ($nome, $codigo_acesso, $senha, $tipo_usuario_id,$status_ativo, $municipio_id, $agencia_id) {
 
-            //to this
-            // if (self::$conn) 
-            // {
-            //     self::$connected=TRUE;
-            //     self::$conn = parent::$conn;
-            
-            
-            // } else {
-            //     self::$Error = '504';
-            //     self::$message = "Banco de dados desconectado";
-            //     return array("Error" => "504");
-            // }
+                self::$conn->begin_transaction();
 
-// adaptar
-            //this
-            // try {
-            //     // Inserção na tabela de usuários
-            //     $sql_usuario = "INSERT INTO usuarios (nome, codigo_acesso, senha, tipo_usuario_id) 
-            //                     VALUES ('$nome', '$codigo_acesso', '$senha', $tipo_usuario_id)";
-            //     if ($conexao->query($sql_usuario) === TRUE) {
-                  
-            //         $usuario_id = $conexao->insert_id;
-        
-            //         // Inserção na tabela de períodos de vigência
-            //         $sql_periodo = "INSERT INTO periodos_vigencia (usuario_id, data_inicio, data_fim) 
-            //                         VALUES ($usuario_id, '$data_inicio', '$data_fim')";
-                    
-            //         if ($conexao->query($sql_periodo) === TRUE) {
-            //             // Inserção na tabela de relacionamentos Usuário-Município-Agência
-            //             $sql_relacionamento = "INSERT INTO usuario_municipio_agencia (usuario_id, municipio_id, agencia_id) 
-            //                                    VALUES ($usuario_id, $municipio_id, $agencia_id)";
-        
-            //             if ($conexao->query($sql_relacionamento) === TRUE) {
-            //                 $conexao->commit();
-            //                 $_SESSION['mensagem'] = 'Usuário inserido com sucesso!';
-            //                 header('Location: ../index.php');
-            //                 exit;
-            //             } else {
-                          
-            //                 $conexao->rollback();
-            //                 $_SESSION['mensagem'] = 'Erro ao inserir relacionamento: ' . $conexao->error;
-            //                 // echo "Erro xx: " . $conexao->error . "<br>";
-            //                  header('Location: ../index.php');
-            //                 exit;
-            //             }
-            //         } else {
-                       
-            //             // echo "Erro xxx: " . $conexao->error . "<br>";
-            //             $conexao->rollback();
-            //             $_SESSION['mensagem'] = 'Erro ao inserir período de vigência: ' . $conexao->error;
-            //              header('Location: ../index.php');
-            //             exit;
-            //         }
-            //     } else {
-            //         // echo "Erro x: " . $conexao->error . "<br>";
-                  
-            //         $conexao->rollback();
-            //         $_SESSION['mensagem'] = 'Erro ao inserir usuário: ' . $conexao->error;
-            //          header('Location: ../index.php');
-            //         exit;
-            //     }
-            // } catch (Exception $e) {
-              
-            //     echo "Erro xxxx: " . $conexao->error . "<br>";
-            //     $conexao->rollback();
-            //     $_SESSION['mensagem'] = 'Erro ao processar a transação: ' . $e->getMessage();
-            //      header('Location: ../index.php');
-            //     exit;
-            // }
+                try {
+                    // Primer INSERT: Insertar en tbusers
+                    $query1 = "INSERT INTO `tbusers` (
+                                `cd_acesso`, 
+                                `nm_user`, 
+                                `te_pwd`, 
+                                `id_area`, 
+                                `cd_currposition`, 
+                                `cs_ativo`
+                            ) VALUES (
+                                ?, ?, ?, ?, ?, ?
+                            )";
+                    $stmt1 = self::$conn->prepare($query1);
+                    $stmt1->bind_param("ssssis", $codigo_acesso, $nome, $senha, $tipo_usuario, $status_ativo);
+                    $stmt1->execute();
+                    $last_user_id = self::$conn->insert_id; // Obtener el ID del usuario insertado
 
+                    // Segundo INSERT: Insertar en tbagenciasxmunicipios
+                    $query2 = "INSERT INTO `tbagenciasxmunicipios` (
+                                `id_agencia`
+                            ) VALUES (?)";
+                    $stmt2 = self::$conn->prepare($query2);
+                    $stmt2->bind_param("i", $agencia_id);
+                    $stmt2->execute();
+                    $last_agencia_id = self::$conn->insert_id; // Obtener el ID generado para la agencia
+
+                    // Tercer INSERT: Insertar en tbusersxmunicipios
+                    $query3 = "INSERT INTO `tbusersxmunicipios` (
+                                `id_user`, 
+                                `id_agenciaxmunicipio`, 
+                                `cs_visible`, 
+                                `cd_currposition`
+                            ) VALUES (
+                                ?, ?, ?, ?
+                            )";
+                    $stmt3 = self::$conn->prepare($query3);
+                    $stmt3->bind_param("iiss", $last_user_id, $last_agencia_id, $status_ativo, $tipo_usuario);
+                    $stmt3->execute();
+
+
+                    self::$conn->commit();
+
+                    return array("Success" => "User saved successfully");
+
+                } catch (Exception $e) {
+
+                    self::$conn->rollback();
+
+                    self::$Error = '500';
+                    self::$message = "Error al guardar el usuario: " . $e->getMessage();
+                    return array("Error" => "500", "Message" => self::$message);
+                }
+            } else {
+                self::$Error = '504';
+                self::$message = "Banco de dados desconectado";
+                return array("Error" => "504");
+            }
         }
 
-        public function updateUser ($nome, $codigo_acesso, $senha, $tipo_usuario_id,$status_ativo, $municipio_id, $agencia_id) {}
+        // $user_id,$agenciaxmuni_id
+        public function updateUser($nome, $codigo_acesso, $senha, $tipo_usuario, $user_id, $agencia_id,$agenciaxmuni_id) {
+            if (self::$conn) {
+                self::$connected = TRUE;
+                self::$conn = parent::$conn;
+        
+                // Iniciar transacción
+                self::$conn->begin_transaction();
+        
+                try {
+                    // Primer UPDATE: Actualizar en tbusers
+                    $query1 = "UPDATE `tbusers` SET
+                                `cd_acesso` = ?, 
+                                `nm_user` = ?, 
+                                `te_pwd` = ?, 
+                                `id_area` = ?, 
+                                `cd_currposition` = ?, 
+                                
+                              WHERE `id_user` = ?";  // Ahora se usa `id_user` para identificar al usuario
+        
+                    $stmt1 = self::$conn->prepare($query1);
+                    $stmt1->bind_param("sssssis", $codigo_acesso, $nome, $senha, $tipo_usuario, $user_id); // Usamos `id_user` en WHERE
+                    $stmt1->execute();
+        
+                    // Segundo UPDATE: Actualizar en tbagenciasxmunicipios
+                    $query2 = "UPDATE `tbagenciasxmunicipios` SET 
+                                `id_agencia` = ?
+                              WHERE `id_agenciaxmunicipio` = ?"; // Se usa `id_agencia` para identificar la agencia existente
+        
+                    $stmt2 = self::$conn->prepare($query2);
+                    $stmt2->bind_param("ii", $agencia_id, $agenciaxmuni_id); // Usamos `id_agencia` en WHERE
+                    $stmt2->execute();
+        
+                    // Obtener el ID de la agencia insertado o actualizado
+                    $last_agencia_id = self::$conn->insert_id;
+        
+                    // Tercer UPDATE: Actualizar en tbusersxmunicipios
+                    $query3 = "UPDATE `tbusersxmunicipios` SET
+                                `id_agenciaxmunicipio` = ?
+                              WHERE `id_user` = ?"; // Usamos `id_user` para filtrar por el usuario
+        
+                    $stmt3 = self::$conn->prepare($query3);
+                    $stmt3->bind_param("ii", $agenciaxmuni_id, $user_id); // Usamos `last_agencia_id` para el `id_agenciaxmunicipio`
+                    $stmt3->execute();
+        
+                    // Confirmar la transacción
+                    self::$conn->commit();
+        
+                    return array("Success" => "User updated successfully");
+        
+                } catch (Exception $e) {
+                    // En caso de error, hacer rollback de la transacción
+                    self::$conn->rollback();
+        
+                    self::$Error = '500';
+                    self::$message = "Error al actualizar el usuario: " . $e->getMessage();
+                    return array("Error" => "500", "Message" => self::$message);
+                }
+            } else {
+                self::$Error = '504';
+                self::$message = "Banco de dados desconectado";
+                return array("Error" => "504");
+            }
+        }
+        
         
 
         public function getCursor () {
@@ -320,4 +385,3 @@
 
 }
 ?>
-

@@ -64,54 +64,11 @@ $(document).ready(function() {
             div_program.html(data);
             let modal = $(".modal");
             modal.append(hiddenInput)
-            modal.append('<h1 style="color:red;">'+userId+'</h1>');
+            // modal.append('<h1 style="color:red;">'+userId+'</h1>');
             modal.modal('show');
     
         });
        
     });
  
-  
- 
-    // $(document).on("click", ".btn-editar", function(e) {
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //     var userId = $(this).data('id'); 
-    
-    //     $.ajax({
-    //         url: 'modules/ler_userbyid.php',
-    //         type: 'POST',
-    //         data: { id_user: userId },
-    //         success: function(data) {
-    //             var resp = JSON.parse(data);
-    //             var error = resp.Error;
-    //             var response = resp.Data;
-    //             if (error == '0' && response.length > 0) {
-    //                 var item = response[0]; 
-    
-    //                 $.get('views/vi_criarusuario.html', { id: userId }, function(data) {
-    //                     // Cargar el contenido en el modal
-    //                     $('#nome').val(item.nome_usuario);
-    //                     $('#codigo').val(item.codigo_usuario);
-    //                     // $('#senha').val(item.senha_usuario); 
-    //                     // $('#tipo_usuario').val(item.tipo_usuario); 
-    //                     // $('#estado').val(item.estado_usuario); 
-    //                     // $('#municipio').val(item.municipio_usuario); 
-    //                     // $('#agencia').val(item.agencia_usuario);
-    
-                        
-    //                     div_program.html('');
-    //                     div_program.html(data);
-    //                     let modal = $(".modal");
-    //                     modal.modal('show');
-    //                 });
-    //             }
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error('Error:', error);
-    //         }
-    //     });
-    // });
-    
-  
  });

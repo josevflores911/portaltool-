@@ -3,10 +3,10 @@ $(document).ready(function () {
     let nomeInput = $("input#nome");  
     let codigoInput = $("input#codigo");  
     let senhaInput = $("input#senha");  
-    let sel_tiposusuario = $("option#sel_tiposusuario");  
-    let sel_estados = $("option#sel_estados");  
-    let sel_municipios = $("option#sel_municipios");  
-    let sel_agencias = $("option#sel_agencias");  
+    let sel_tiposusuario = $("select#sel_tiposusuario");  
+    let sel_estados = $("select#sel_estados");  
+    let sel_municipios = $("select#sel_municipios");  
+    let sel_agencias = $("select#sel_agencias");  
     
     let selectedId = div_item.val();
     $.ajax({
@@ -21,28 +21,28 @@ $(document).ready(function () {
                 var item = response[0]; 
                 console.log("a", item);
                 
-                nomeInput.val(item.nome_usuario)
-                codigoInput.val(item.codigo_usuario)
-                senhaInput.val("item.senha")
+                nomeInput.val(item.nome_usuario);
+                codigoInput.val(item.codigo_usuario);
+                senhaInput.val(item.senha);
                 
                 
 
-                // sel_tiposusuario.append("<option value='" + item.tipo_usuario + "'>" + item.tipo_usuario + "</option>");
-                // sel_estados.append("<option value='" + item.estado_usuario + "'>" + item.estado_usuario + "</option>");
-                // sel_municipios.append("<option value='" + item.indice + "'>" + item.municipio_usuario + "</option>");
-                // sel_agencias.append("<option value='" + item.indice + "'>" + item.agencia_usuario + "</option>");
+                sel_tiposusuario.append("<option value='" + item.tipo_usuario + "'>" + item.tipo_usuario + "</option>");
+                sel_estados.append("<option value='" + item.estado_usuario + "'>" + item.estado_usuario + "</option>");
+                sel_municipios.append("<option value='" + item.indice + "'>" + item.municipio_usuario + "</option>");
+                sel_agencias.append("<option value='" + item.indice + "'>" + item.agencia_usuario + "</option>");
                 
-                // sel_tiposusuario.html('')
-                // sel_tiposusuario.append(item.tipo_usuario);
-                // sel_estados.html('');
-                // sel_estados.append(item.estado_usuario);
-                sel_municipios.html('');
-                sel_municipios.append( item.municipio_usuario );
-                sel_agencias.html('');
-                sel_agencias.append( item.agencia_usuario );
+                // // // sel_tiposusuario.html('')
+                // // // sel_tiposusuario.append(item.tipo_usuario);
+                // // // sel_estados.html('');
+                // // // sel_estados.append(item.estado_usuario);
+                // // sel_municipios.html('');
+                // // sel_municipios.append( item.municipio_usuario );
+                // // sel_agencias.html('');
+                // // sel_agencias.append( item.agencia_usuario );
 
-                sel_municipios.prop('disabled', false);
-                sel_agencias.prop('disabled', false);
+                // sel_municipios.prop('disabled', false);
+                // sel_agencias.prop('disabled', false);
                 
             }
         },

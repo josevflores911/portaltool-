@@ -4,7 +4,8 @@
    <script src="scripts/dropdown_tabelausuario/load_estados.js"></script>
    <script src="scripts/dropdown_tabelausuario/load_municipios.js"></script>
    <script src="scripts/dropdown_tabelausuario/load_agencias.js"></script>
-   <script src="scripts/load_userbyid.js"></script>
+    <script src="scripts/load_userbyid.js"></script>
+  <!-- <script src="scripts/form_tabelausuario.js"></script> -->
 </head>
 <!-- Modal -->
 <div class="modal fade custom-modal" id="criar_usuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -56,13 +57,13 @@
                            </div>
                            <div class="col-md-3">
                               <label for="municipio" class="text-dark">Municipio:</label>
-                              <select id="sel_municipios" name="municipio" class="form-select"  required disabled>
+                              <select id="sel_municipios" name="municipio" class="form-select"  required>
                                  <option value=""  id="sel_municipios">Seleccionar Municipio</option>
                               </select>
                            </div>
                            <div class="col-md-3">
                               <label for="agencia" class="text-dark">Agência:</label>
-                              <select id="sel_agencias" name="agencia" class="form-select"  required disabled>
+                              <select id="sel_agencias" name="agencia" class="form-select"  required >
                                  <option value="" id="sel_agencias"> Seleccionar Agência</option>
                               </select>
                            </div>
@@ -74,7 +75,7 @@
             </div>
          </div>
          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+            <button id="btatualizar" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
             <button type="button" class="btn btn-primary">Salvar</button>
          </div>
       </div>
