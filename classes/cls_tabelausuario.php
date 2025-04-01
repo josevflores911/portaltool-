@@ -2,6 +2,7 @@
    error_reporting(0);
    error_reporting(E_ALL);
    require_once ("cls_connect.php");
+   include_once ('../classes/cls_aesencdec.php');
 
    class cls_tabelausuario extends cls_connect {
         static $cursor = NULL;
@@ -118,6 +119,13 @@
                                         t.indice = ?";
 
                             $result = json_decode($this->dbquery($cmd,$iduser));
+
+
+                            $te_pwd= base64_decode($result->records[0]->senha);
+                            $oDecrypt = new AES_EncryptDecrypt(DECRYPT);
+                            $te_newpwd = $oDecrypt->decrypt_password($te_pwd);
+                            $result->records[0]->senha=$te_newpwd;
+                            
                         
                             if ($result->nrecords > 0) {
                                 self::$Error = '0';
@@ -137,7 +145,7 @@
         }
 
          //POST
-         public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $agencia_id) {
+         public function saveUser($nome, $codigo_acesso, $tipo_usuario, $agencia_id) {
             if (self::$conn) {
                 self::$connected = TRUE;
                 self::$conn = parent::$conn;
@@ -168,8 +176,14 @@
                             ) VALUES (
                                 ?, ?, ?, ?, ?,?,?,?,?,?
                             )";
+
+                    $cd_acesso = $codigo_acesso;
+                    $oDecrypt = new AES_EncryptDecrypt(1);
+                    $te_pwd = $oDecrypt->encrypt_password(substr($cd_acesso,0,5) . '12345');
+                    $te_pwd = base64_encode($te_pwd);                    
+
                     $stmt1 = self::$conn->prepare($query1);
-                    $stmt1->bind_param("sssissssss", $codigo_acesso, $nome,$email,$idarea,$cd_matricula,$hora_inicio_jornada,$hora_inicio_jornada,$cd_token, $senha, $tipo_usuario);
+                    $stmt1->bind_param("sssissssss", $codigo_acesso, $nome,$email,$idarea,$cd_matricula,$hora_inicio_jornada,$hora_inicio_jornada,$cd_token, $te_pwd, $tipo_usuario);
                     $stmt1->execute();
                     $last_user_id = self::$conn->insert_id; // Obtener el ID del usuario insertado
 

@@ -5,7 +5,7 @@ $(document).ready(function (evt) {
     
     sel_municipios.on("change", (e) => { 
         let selectedMunicipioId = sel_municipios.val();
-        carregarMunicipios(sel_agencias,selectedMunicipioId);
+        carregarAgencias(sel_agencias,selectedMunicipioId);
     });
 
     $(document).on("change", ".form-select", function () {

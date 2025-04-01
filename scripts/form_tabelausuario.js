@@ -4,11 +4,11 @@ $(document).ready(() => {
     
     let nome = $("#nome");
     let codigo = $("#codigo");
-    let senha = $("#senha");
+    // let senha = $("#senha");
     
     nome.val(' ');
     codigo.val(' ');
-    senha.val(' ');
+    // senha.val(' ');
 
     let bt_salvar = $('#btsalvar');    
     let bt_atualizar = $('#btatualizar');
@@ -22,34 +22,34 @@ $(document).ready(() => {
     })
     
     
+    //salvar usuario
     $(bt_salvar).on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
 
         let nome_val = nome.val();
         let codigo_val = codigo.val();
-        let senha_val = senha.val();
+        // let senha_val = senha.val();
 
-        if (nome_val && codigo_val && senha_val && nome_val.trim() !== "" && codigo_val.trim() !== "" && senha_val.trim() !== "") {
+        if (nome_val && codigo_val && nome_val.trim() !== "" && codigo_val.trim() !== "") {
             
-                let sel_tiposusuario = $("#sel_tiposusuario").val();
-                let sel_estados = $("#sel_estados").val();
-                let sel_municipios = $("#sel_municipios").val();
-                let sel_agencias = $("#sel_agencias").val();
+                let sel_tiposusuario = $("select#sel_tiposusuario").val();
+                let sel_estados = $("select#sel_estados").val();
+                let sel_municipios = $("select#sel_municipios").val();
+                let sel_agencias = $("select#sel_agencias").val();
+
     
                 $.ajax({
                     url: 'modules/gravar_tabelausuario.php',
                     type: 'POST',
-                    data: { nome: nome_val, codigo: codigo_val, senha: senha_val, sel_tiposusuario: sel_tiposusuario, sel_agencias: sel_agencias },
+                    data: { nome: nome_val, codigo: codigo_val, sel_tiposusuario: sel_tiposusuario, sel_agencias: sel_agencias },
                     success: function (data) {
                         var resp = JSON.parse(data);
                         var error = resp.Error;
                         var response = resp.Data;
                         if (error == '0' && response.length > 0) {
-                            var item = response[0];
-                        
-                            console.log("a", item);
-                        
+                            var item = response[0];                        
+                            // console.log("a", item);
                         }
                     },
                     error: function (xhr, status, error) {
@@ -66,7 +66,7 @@ $(document).ready(() => {
 
     });
 
-
+    //add a new row with states, counties and agencies
     $(document).on("click", "#btn_addcolumn", function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -111,7 +111,7 @@ $(document).ready(() => {
     });
  
 
-    //TODO 
+    //TODO update
     $(bt_atualizar).on("click", (e) => {
         e.preventDefault();
         e.stopPropagation();

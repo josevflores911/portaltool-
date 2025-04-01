@@ -6,7 +6,7 @@ $(document).ready(function (evt) {
         let sel_municipios = $("select#sel_municipios");   
         let selectedEstado = sel_estados.val();
         // console.log($('#item').attr('name'));
-        carregarMunicipios(sel_municipios,selectedEstado, 2);
+        carregarMunicipios(sel_municipios,selectedEstado);
     });
 
     //divs dinamicos
