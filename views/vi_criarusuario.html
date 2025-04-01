@@ -27,7 +27,7 @@
                   <div class="card-body">
                      <form class="card-text form-login" action="" autocomplete="off"><!--POST-->
                         <!-- Primeira linha (nome, código e senha) -->
-                        <div class="row mb-3">
+                        <div class="row mb-3" id="item">
                            <div class="col-md-4">
                               <label class="text-dark">Nome</label>
                               <input type="text" id="nome" name="nome" class="form-control" maxlength="50" placeholder="Ingresse seu nome" required>
@@ -42,14 +42,14 @@
                            </div>
                         </div>
                         <!-- Segunda linha (tipo de usuário, estado, município e agência) -->
-                        <div class="row mb-3">
-                           <div class="col-md-3">
+                        <div class="row mb-3" id="item">
+                           <div class="col-md-2" id="sel_tiposusuario">
                               <label class="text-dark">Tipo de Usuário</label>
                               <select id="sel_tiposusuario" name="tipo_usuario" class="form-select" required>
                                  <option value="" disabled selected>Selecione um tipo de usuário</option>
                               </select>
                            </div>
-                           <div class="col-md-3">
+                           <div class="col-md-2" id="sel_estados">
                               <label class="text-dark">Estado</label>
                               <select id="sel_estados" name="estado" class="form-select" required>
                                  <option value="" disabled selected>Selecione um estado</option>
@@ -61,11 +61,17 @@
                                  <option value="">Seleccionar Municipio</option>
                               </select>
                            </div>
-                           <div class="col-md-3">
+                           <div class="col-md-3" id="sel_agencias">
                               <label for="agencia" class="text-dark">Agência:</label>
                               <select id="sel_agencias" name="agencia" class="form-select"  required disabled>
                                  <option value="">Seleccionar Agência</option>
                               </select>
+                           </div>
+
+                           <div class="col-md-2">
+                              <button type="button" value="" id="btn_addcolumn" class="add-button add-button-icon" aria-label="Icon only">
+                                 <span class="plus-icon"><i class="fa fa-plus  fa-2x" aria-hidden="true"></i></span>
+                               </button>
                            </div>
                         </div>
                         <!-- Terceira linha (período início e fim) -->
@@ -93,7 +99,7 @@
          </div>
          <div class="modal-footer">
             <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
-            <button id="btsalvar" type="button" class="btn btn-primary" disabled>Salvar</button>
+            <button id="btsalvar" type="submit" class="btn btn-primary" disabled>Salvar</button>
          </div>
       </div>
    </div>
