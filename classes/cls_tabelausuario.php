@@ -14,6 +14,11 @@
         {
             parent::__construct();
             self::$conn = parent::$conn;
+           
+        }
+
+        //GET_ALL
+        public function getAllActiveUsers(){
             if (self::$conn) 
             {
                 self::$connected=TRUE;
@@ -37,7 +42,11 @@
                             tbmunicipios m ON um.id_userxmunicipio = m.id_muni
                         JOIN 
                             tbagencias a ON um.id_agenciaxmunicipio = a.id_agencia
-                        ORDER BY u.id_user ASC";
+                        WHERE
+                            u.cs_ativo = 'S'
+                        ORDER BY u.id_user DESC
+                        LIMIT 1000";
+                        
 
                 $result = json_decode($this->dbquery($cmd));
             
@@ -45,16 +54,20 @@
                     self::$Error = '0';
                     self::$message = 'Consulta realizada com sucesso';
                     self::$cursor = $result->records;
+                    return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
                 } else {
                     self::$Error = '404';
                     self::$message = "Consulta não retornou registros";
+                    return array("Error" => "404");
                 }
             } else {
                 self::$Error = '504';
                 self::$message = "Banco de dados desconectado";
+                return array("Error" => "504");
             }
         }
 
+        //GET_BY_ID
         public function getUserById($iduser){
                 if (self::$conn) 
                         {
@@ -123,124 +136,8 @@
                         }
         }
 
-        public function getAllUserType(){
-            if (self::$conn) 
-                {
-                    self::$connected=TRUE;
-                    self::$conn = parent::$conn;
-                    
-                    $cmd = " SELECT ROW_NUMBER() OVER (ORDER BY cd_currposition) AS indice, cd_currposition 
-                                FROM (SELECT DISTINCT cd_currposition FROM tbusers) AS distinct_positions";
-
-                    $result = json_decode($this->dbquery($cmd));
-                
-                    if ($result->nrecords > 0) {
-                        self::$Error = '0';
-                        self::$message = 'Consulta realizada com sucesso';
-                        self::$cursor = $result->records;
-                        return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
-                    } else {
-                        self::$Error = '404';
-                        self::$message = "Consulta não retornou registros";
-                        return array("Error" => "404");
-                    }
-                } else {
-                    self::$Error = '504';
-                    self::$message = "Banco de dados desconectado";
-                    return array("Error" => "504");
-                }
-        }
-
-        public function getAllStates(){
-            if (self::$conn) 
-                {
-                    self::$connected=TRUE;
-                    self::$conn = parent::$conn;
-                    
-                    $cmd = " SELECT ROW_NUMBER() OVER (ORDER BY nm_estado) AS indice, nm_estado 
-                            FROM (SELECT DISTINCT nm_estado FROM tbmunicipios) AS distinct_states";
-
-                    $result = json_decode($this->dbquery($cmd));
-                
-                    if ($result->nrecords > 0) {
-                        self::$Error = '0';
-                        self::$message = 'Consulta realizada com sucesso';
-                        self::$cursor = $result->records;
-                        return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
-                    } else {
-                        self::$Error = '404';
-                        self::$message = "Consulta não retornou registros";
-                        return array("Error" => "404");
-                    }
-                } else {
-                    self::$Error = '504';
-                    self::$message = "Banco de dados desconectado";
-                    return array("Error" => "504");
-                }
-        }
-
-        //municipios
-        public function getAllCountyByState($nome_estado="Alagoas"){
-            if (self::$conn) 
-                        {
-                            self::$connected=TRUE;
-                            self::$conn = parent::$conn;
-                            
-                            $cmd = "SELECT id_muni, nm_muni, nm_estado
-                                        FROM tbmunicipios
-                                        WHERE nm_estado = ?";
-
-                            $result = json_decode($this->dbquery($cmd,$nome_estado));
-                        
-                            if ($result->nrecords > 0) {
-                                self::$Error = '0';
-                                self::$message = 'Consulta realizada com sucesso';
-                                self::$cursor = $result->records;
-                                return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
-                            } else {
-                                self::$Error = '404';
-                                self::$message = "Consulta não retornou registros";
-                                return array("Error" => "404");
-                            }
-                        } else {
-                            self::$Error = '504';
-                            self::$message = "Banco de dados desconectado";
-                            return array("Error" => "504");
-                        }
-
-        }
-
-        public function getAllAgenciesByCounty($municipio_id){
-            if (self::$conn) 
-                        {
-                            self::$connected=TRUE;
-                            self::$conn = parent::$conn;
-                            
-                            $cmd = " SELECT id_agencia, id_muni, nm_agencia
-                                        FROM tbagencias
-                                        WHERE id_muni = ?";
-
-                            $result = json_decode($this->dbquery($cmd,$municipio_id));
-                        
-                            if ($result->nrecords > 0) {
-                                self::$Error = '0';
-                                self::$message = 'Consulta realizada com sucesso';
-                                self::$cursor = $result->records;
-                                return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
-                            } else {
-                                self::$Error = '404';
-                                self::$message = "Consulta não retornou registros";
-                                return array("Error" => "404");
-                            }
-                        } else {
-                            self::$Error = '504';
-                            self::$message = "Banco de dados desconectado";
-                            return array("Error" => "504");
-                        }
-        }
-
-//
-        public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $agencia_id) {
+         //POST
+         public function saveUser($nome, $codigo_acesso, $senha, $tipo_usuario, $agencia_id) {
             if (self::$conn) {
                 self::$connected = TRUE;
                 self::$conn = parent::$conn;
@@ -300,14 +197,14 @@
 
                     // self::$conn->commit();
 
-                    return array("Success" => "User saved successfully");
+                    return array("Success" => "User salvo com sucesso");
 
                 } catch (Exception $e) {
 
                     self::$conn->rollback();
 
                     self::$Error = '500';
-                    self::$message = "Error al guardar el usuario: " . $e->getMessage();
+                    self::$message = "Erro ao guardar o usuario: " . $e->getMessage();
                     return array("Error" => "500", "Message" => self::$message);
                 }
             } else {
@@ -318,12 +215,12 @@
         }
 
         // $user_id,$agenciaxmuni_id
+        //PUT
         public function updateUser($nome, $codigo_acesso, $senha, $tipo_usuario, $user_id, $agencia_id,$agenciaxmuni_id) {
             if (self::$conn) {
                 self::$connected = TRUE;
                 self::$conn = parent::$conn;
         
-                // Iniciar transacción
                 self::$conn->begin_transaction();
         
                 try {
@@ -335,44 +232,44 @@
                                 `id_area` = ?, 
                                 `cd_currposition` = ?, 
                                 
-                              WHERE `id_user` = ?";  // Ahora se usa `id_user` para identificar al usuario
+                              WHERE `id_user` = ?";  
         
                     $stmt1 = self::$conn->prepare($query1);
-                    $stmt1->bind_param("sssssis", $codigo_acesso, $nome, $senha, $tipo_usuario, $user_id); // Usamos `id_user` en WHERE
+                    $stmt1->bind_param("sssssis", $codigo_acesso, $nome, $senha, $tipo_usuario, $user_id); 
                     $stmt1->execute();
         
                     // Segundo UPDATE: Actualizar en tbagenciasxmunicipios
                     $query2 = "UPDATE `tbagenciasxmunicipios` SET 
                                 `id_agencia` = ?
-                              WHERE `id_agenciaxmunicipio` = ?"; // Se usa `id_agencia` para identificar la agencia existente
+                              WHERE `id_agenciaxmunicipio` = ?"; 
         
                     $stmt2 = self::$conn->prepare($query2);
-                    $stmt2->bind_param("ii", $agencia_id, $agenciaxmuni_id); // Usamos `id_agencia` en WHERE
+                    $stmt2->bind_param("ii", $agencia_id, $agenciaxmuni_id); 
                     $stmt2->execute();
         
                     // Obtener el ID de la agencia insertado o actualizado
-                    $last_agencia_id = self::$conn->insert_id;
+                    // $last_agencia_id = self::$conn->insert_id;
         
                     // Tercer UPDATE: Actualizar en tbusersxmunicipios
                     $query3 = "UPDATE `tbusersxmunicipios` SET
                                 `id_agenciaxmunicipio` = ?
-                              WHERE `id_user` = ?"; // Usamos `id_user` para filtrar por el usuario
+                              WHERE `id_user` = ?";
         
                     $stmt3 = self::$conn->prepare($query3);
                     $stmt3->bind_param("ii", $agenciaxmuni_id, $user_id); // Usamos `last_agencia_id` para el `id_agenciaxmunicipio`
                     $stmt3->execute();
         
-                    // Confirmar la transacción
-                    self::$conn->commit();
+                    
+                    //self::$conn->commit();
         
                     return array("Success" => "User updated successfully");
         
                 } catch (Exception $e) {
-                    // En caso de error, hacer rollback de la transacción
+                    
                     self::$conn->rollback();
         
                     self::$Error = '500';
-                    self::$message = "Error al actualizar el usuario: " . $e->getMessage();
+                    self::$message = "Erro ao atualizar o usuario: " . $e->getMessage();
                     return array("Error" => "500", "Message" => self::$message);
                 }
             } else {
@@ -381,14 +278,174 @@
                 return array("Error" => "504");
             }
         }
+
+        //delete
+        public function deleteUser($iduser){
+            if (self::$conn) {
+                self::$connected = TRUE;
+                self::$conn = parent::$conn;
+
+                self::$conn->begin_transaction();
+
+                $user_status='N';
+
+                try {
+                    // Primer INSERT: Insertar en tbusers
+                    $query1 = "UPDATE `tbusers`
+                      SET 
+                        `cs_ativo` = ?
+                      WHERE `id_user` = ?";
+                    $stmt1 = self::$conn->prepare($query1);
+                    $stmt1->bind_param("si",$user_status,$iduser);
+                    $stmt1->execute();
+                 
+
+                    // self::$conn->commit();
+
+                    return array("Success" => "Status usuario inativo atualizado");
+
+                } catch (Exception $e) {
+
+                    self::$conn->rollback();
+
+                    self::$Error = '500';
+                    self::$message = "Erro ao guardar usuario: " . $e->getMessage();
+                    return array("Erro" => "500", "Message" => self::$message);
+                }
+            } else {
+                self::$Error = '504';
+                self::$message = "Banco de dados desconectado";
+                return array("Erro" => "504");
+            }
+        }
+        
+//---remove from here to cls_dropdownuser
+
+        public function getAllUserType(){
+            if (self::$conn) 
+                {
+                    self::$connected=TRUE;
+                    self::$conn = parent::$conn;
+                    
+                    $cmd = " SELECT ROW_NUMBER() OVER (ORDER BY cd_currposition) AS indice, cd_currposition 
+                                FROM (SELECT DISTINCT cd_currposition FROM tbusers) AS distinct_positions";
+
+                    $result = json_decode($this->dbquery($cmd));
+                
+                    if ($result->nrecords > 0) {
+                        self::$Error = '0';
+                        self::$message = 'Consulta realizada com sucesso';
+                        self::$cursor = $result->records;
+                        return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
+                    } else {
+                        self::$Error = '404';
+                        self::$message = "Consulta não retornou registros";
+                        return array("Error" => "404");
+                    }
+                } else {
+                    self::$Error = '504';
+                    self::$message = "Banco de dados desconectado";
+                    return array("Error" => "504");
+                }
+        }
+
+        public function getAllStates(){
+            if (self::$conn) 
+                {
+                    self::$connected=TRUE;
+                    self::$conn = parent::$conn;
+                    
+                    $cmd = " SELECT ROW_NUMBER() OVER (ORDER BY nm_estado) AS indice, nm_estado 
+                            FROM (SELECT DISTINCT nm_estado FROM tbmunicipios) AS distinct_states";
+
+                    $result = json_decode($this->dbquery($cmd));
+                
+                    if ($result->nrecords > 0) {
+                        self::$Error = '0';
+                        self::$message = 'Consulta realizada com sucesso';
+                        self::$cursor = $result->records;
+                        return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
+                    } else {
+                        self::$Error = '404';
+                        self::$message = "Consulta não retornou registros";
+                        return array("Error" => "404");
+                    }
+                } else {
+                    self::$Error = '504';
+                    self::$message = "Banco de dados desconectado";
+                    return array("Error" => "504");
+                }
+        }
+
+        //municipios
+        public function getAllCountyByState($nome_estado){
+            if (self::$conn) 
+                        {
+                            self::$connected=TRUE;
+                            self::$conn = parent::$conn;
+                            
+                            $cmd = "SELECT DISTINCT id_muni, nm_muni, nm_estado
+                                        FROM tbmunicipios
+                                        WHERE nm_estado = ?";
+
+                            $result = json_decode($this->dbquery($cmd,$nome_estado));
+                        
+                            if ($result->nrecords > 0) {
+                                self::$Error = '0';
+                                self::$message = 'Consulta realizada com sucesso';
+                                self::$cursor = $result->records;
+                                return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
+                            } else {
+                                self::$Error = '404';
+                                self::$message = "Consulta não retornou registros";
+                                return array("Error" => "404");
+                            }
+                        } else {
+                            self::$Error = '504';
+                            self::$message = "Banco de dados desconectado";
+                            return array("Error" => "504");
+                        }
+
+        }
+
+        public function getAllAgenciesByCounty($municipio_id){
+            if (self::$conn) 
+                        {
+                            self::$connected=TRUE;
+                            self::$conn = parent::$conn;
+                            
+                            $cmd = " SELECT DISTINCT id_agencia, id_muni, nm_agencia
+                                        FROM tbagencias
+                                        WHERE id_muni = ?";
+
+                            $result = json_decode($this->dbquery($cmd,$municipio_id));
+                        
+                            if ($result->nrecords > 0) {
+                                self::$Error = '0';
+                                self::$message = 'Consulta realizada com sucesso';
+                                self::$cursor = $result->records;
+                                return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
+                            } else {
+                                self::$Error = '404';
+                                self::$message = "Consulta não retornou registros";
+                                return array("Error" => "404");
+                            }
+                        } else {
+                            self::$Error = '504';
+                            self::$message = "Banco de dados desconectado";
+                            return array("Error" => "504");
+                        }
+        }
+
+       
         
         
 
         public function getCursor () {
             if (self::$connected) {
-                return array('Error' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
+                return array('Erro' => self::$Error, 'Message' => self::$message, 'Data' => self::$cursor);
             } else {
-                return array("Error" => "504");
+                return array("Erro" => "504");
             }
         }
    

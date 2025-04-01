@@ -4,8 +4,8 @@
     
     require_once ("../classes/cls_tabelausuario.php");
 
-    $ouser = new cls_tabelausuario();
-    $result = $ouser->getCursor();
+    $users = new cls_tabelausuario();
+    $result = $users->getAllActiveUsers();
 
     echo json_encode($result);
 ?>
