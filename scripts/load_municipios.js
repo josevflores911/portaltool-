@@ -1,4 +1,5 @@
 $(document).ready(function(evt) {
+
     var id_user = $(".id_user").val();
     var tp_user = $(".tp_user").val();
     let sel_municipios = $("select#sel_municipios");
@@ -6,7 +7,7 @@ $(document).ready(function(evt) {
         url: 'modules/ler_municipios.php',
         type: 'POST',
         data: { id_user: id_user, tp_user: tp_user },
-        success: function (data) {
+        success: function(data) {
             var resp = JSON.parse(data);
             var error = resp.Error;
             var response = resp.Data;

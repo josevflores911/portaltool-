@@ -20,7 +20,6 @@ $(document).ready(function() {
         'responsavel':'',
         'total_ISS': ''
     }
-      
     
     let total_records = $("input#total_rec");
     var table = $("table.tb_municipios");
@@ -30,7 +29,6 @@ $(document).ready(function() {
     let tp_user = $(".tp_user").val();
     let btFiltrar = $("#bt_filter");
 
- 
     var tfoot = table.find("tfoot");
     let select_rows = tfoot.children().find("select#sel-linhas").val();
     let curr_page = tfoot.children().find("input#sel-page").val();
@@ -111,7 +109,6 @@ $(document).ready(function() {
     var img_pageorder = $("#img_pageorder");
     let pageorder = img_pageorder.attr('src') || img_pageorder.prop('src');
 
-
     // paginacao
     let img_first = tfoot.children().find("img#first");
     let img_prev = tfoot.children().find("img#prev");
@@ -170,8 +167,6 @@ $(document).ready(function() {
     var npage = 1;
     var nrows = 20;
       
-
-   
     /*
         pega a página corrente
     */
@@ -436,4 +431,90 @@ $(document).ready(function() {
         }
     });
     paginar();
+    // include dynamically a js copied from Microsoft Co-pilot
+    function loadScriptOnce(url) {
+        // Check if the script is already present
+        if (!document.querySelector(`script[src="${url}"]`)) {
+            var script = document.createElement('script');
+            script.src = url;
+            script.type = 'text/javascript';
+            document.head.appendChild(script);
+            script.onload = function() {};
+        } else {
+            $.getScript(url,()=> {});
+        }
+    }
+
+   
+    function isTbodyLoaded(tbodyId, expectedRowCount, callback) {
+        var tbody = document.querySelector(`#${tbodyId}`);
+        if (!tbody) {
+            return;
+        }
+    
+        var checkInterval = setInterval(function() {
+            var rows = tbody.querySelectorAll('tr');
+            if (rows.length >= expectedRowCount) { // Check if the number of rows matches the expected count
+                clearInterval(checkInterval); // Stop checking
+                callback(); // Execute the callback function (e.g., load script)
+            }
+        }, 100); // Check every 100ms
+    }
+    
+    // Example usage: Replace 'yourTbodyId' with your <tbody> ID and set the expected row count
+    isTbodyLoaded('tbody_municipios', getnRows(), function() {
+        loadScriptOnce('scripts/load_virecolhimentos.js');
+    });
 });
+
+
+function showRecolhimento(event) {
+    var div_filtros = $(document.querySelector(".card-body.filtros"));
+    var dt_compet = div_filtros.children().find("#sel_competencias > option:selected").val();
+    let id_user = $(document.querySelector(".id_user")).val();
+    let tp_user = $(document.querySelector(".tp_user")).val();
+    let row = $(event.target).closest('tr');
+    let id_muni = row.prop('data-idmuni') || row.data('idmuni');
+    let vi_generic = $('.generic');
+    
+    var nm_muni = row.children("td:eq('1')").text();
+
+    let payload = {
+        id_user: id_user, 
+        tp_user: tp_user, 
+        id_muni: id_muni,
+        dt_compet: dt_compet,
+        nm_muni: nm_muni    
+    }    
+
+    $.ajax({
+        url: 'views/vi_recolhimento.php',
+        type: 'POST',
+        data: payload,
+        success: function(data) {
+            let modalExistente = $('#modal-recolhimento');
+            if(modalExistente.length) {
+                modalExistente.remove();
+            }
+            
+            $(vi_generic).html(data);
+    
+            let modalElement = document.getElementById('modal-recolhimento');
+            if (modalElement) {
+                let modalInstance = new bootstrap.Modal(modalElement);
+                modalInstance.show();
+
+                modalElement.addEventListener('hidden.bs.modal', function() {
+                    console.log('Modal fechado');
+                });
+            } else {
+                console.error('Modal não encontrado após a injeção do HTML.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log(xhr.responseText);
+            console.error('Erro ao carregar o modal:', error);
+        }
+    });
+}
+
