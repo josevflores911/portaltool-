@@ -109,7 +109,7 @@
                         <div class="card bg-transparent float-end" style='float:left; left:-5em;' >
                             <div class="card-body">
                                 <label for="sel-linhas" class="bg-transparent text-white ">Linhas por página</label>
-                                <select class="selectpicker text-center bg-transparent text-white" id="sel-linhas">
+                                <select class="selectpicker text-center bg-white text-black" id="sel-linhas">
                                     <option value="8">8</option>
                                     <option value="15">15</option>
                                     <option value="20" selected>20</option>
