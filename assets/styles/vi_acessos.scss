@@ -1,9 +1,13 @@
 
 .generic {
-    display: block;
+    display: flex;
+    position: relative;
+    flex-direction: column;
     top:3.5%;
-    left: 12%;
-    max-width: 90rem;
+    left: 15.5%;
+    width: auto !important;
+    height: 85vh !important;
+    max-width: 220% !important;
     max-height: fit-content;
     z-index: 2000;
 }
