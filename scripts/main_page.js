@@ -16,8 +16,8 @@ $(document).ready(() => {
         } else {
             img.removeClass("rotate-180");
             cdisplay = "flex";
-            close_panel.css("left", '15.5em;');
-            principal.css("left", '15.6rem');
+            close_panel.css("left", '12.5em;');
+            principal.css("left", '12.6rem');
             principal.css('width', '90%');
         }
         $(".wrapper").css("display",cdisplay);
@@ -54,7 +54,8 @@ $(document).ready(() => {
             var waiting = $("#waiting");
             waiting.css("display", "");
             waiting.css("display", "block");
-            parms = { id_user: id_user };
+            var token   = "d5bccefab1ece23d134b307160ab1df6"; 
+            parms = { id_user: id_user, token: token};
             $.post("modules/sair.php", parms, function(response) {
                 var resp = JSON.parse(response);
                 if (resp.Error == '0') {
@@ -81,13 +82,15 @@ $(document).ready(() => {
         ev.stopPropagation();
         let div_program = $(".principal");
         var id = $(ev.target).attr("id");
-        var v_opt = {"menu-sistem-1": "vi_acessos.php",
-            "menu-sistem-2": "",
+       var v_opt = {
+           "menu-sistem-1": "vi_acessos.php",
+           "menu-sistem-2": "",
             "menu-sistem-3": "",
             "menu-sistem-4": "vi_cadastro.php",
             "menu-sistem-5": "",
-            "menu-sistem-6": "vi_tabela_usuario.php"
-        };
+            "menu-sistem-6": "",
+           "menu-sistem-8": "vi_tabelausuario.html",
+        }
                      
         if (v_opt[id] !== undefined) {
            var program = 'views/'+v_opt[id];
