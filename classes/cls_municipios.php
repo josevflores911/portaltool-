@@ -12,7 +12,7 @@
         static $message ="";
         static $cd_uf=NULL;
         static $dash=NULL;
-        function __construct($id_user, $tp_user)
+        function __construct($id_user=NULL, $tp_user=NULL)
         {
             parent::__construct();
             self::$conn = parent::$conn;
@@ -20,22 +20,25 @@
             {
                 self::$connected=TRUE;
                 self::$conn = parent::$conn;
-                $varray = array('Sistema', 'Administrador', 'Gestor');
-                if (in_array($tp_user, $varray)) {
-                    $cmd = "SELECT id_muni, nm_muni FROM vi_usersxmunicipios GROUP BY nm_muni";
-                    $result = json_decode($this->dbquery($cmd));
-                } else {
-                    $cmd = "SELECT id_muni, nm_muni FROM vi_usersxmunicipios WHERE id_user=? GROUP BY nm_muni";
-                    $result = json_decode($this->dbquery($cmd, $id_user));
+                if (!is_null($id_user) and !is_null($tp_user)) {
+                    $varray = array('Sistema', 'Administrador', 'Gestor');
+                    if (in_array($tp_user, $varray)) {
+                        $cmd = "SELECT id_muni, nm_muni FROM vi_usersxmunicipios GROUP BY nm_muni";
+                        $result = json_decode($this->dbquery($cmd));
+                    } else {
+                        $cmd = "SELECT id_muni, nm_muni FROM vi_usersxmunicipios WHERE id_user=? GROUP BY nm_muni";
+                        $result = json_decode($this->dbquery($cmd, $id_user));
+                    }
+                    if ($result->nrecords > 0) {
+                        self::$Error = '0';
+                        self::$message = 'Consulta realizada com sucesso';
+                        self::$cursor = $result->records;
+                    } else {
+                        self::$Error = '404';
+                        self::$message = "Consulta não retornou registros";
+                    }
                 }
-                if ($result->nrecords > 0) {
-                    self::$Error = '0';
-                    self::$message = 'Consulta realizada com sucesso';
-                    self::$cursor = $result->records;
-                } else {
-                    self::$Error = '404';
-                    self::$message = "Consulta não retornou registros";
-                }
+
             } else {
                 self::$Error = '504';
                 self::$message = "Banco de dados desconectado";
@@ -160,5 +163,33 @@
                 return array("Error" => "504");
             }
         }
+
+        public function getMuniByEstado($cd_estado) {
+            $vet_result = array();
+            if (is_null($cd_estado)) {
+                // pega o primeiro estado registrado
+                $cmd = "SELECT id_muni, nm_muni FROM vi_tbagenciasxmunicipios
+                        GROUP by cd_estado, nm_muni
+                        order by cd_estado, nm_muni";
+                $result = json_decode($this->dbquery($cmd));
+            } else {
+                $cmd = "SELECT id_muni, nm_muni FROM vi_tbagenciasxmunicipios
+                        WHERE cd_estado=?
+                        GROUP by cd_estado, nm_muni
+                        order by cd_estado, nm_muni";
+                $result = json_decode($this->dbquery($cmd, $cd_estado));
+            }
+            if ($result->nrecords > 0) {
+                $cursor = $result->records;
+                foreach ($cursor as $row) {
+                    $row = get_object_vars($row);
+                    $id_muni = $row["id_muni"];
+                    $nm_muni = $row["nm_muni"];
+                    array_push($vet_result, ["id_muni" => $id_muni, "nm_muni" => $nm_muni]);
+                }
+            } 
+            return $vet_result;
+        }
+        
     }
 ?>

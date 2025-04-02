@@ -23,39 +23,55 @@
         static $change_limit=False;
         static $connected = FALSE;
 
-         function __construct($id_user,$tp_user=NULL) {
+         function __construct($id_user=NULL,$tp_user=NULL) {
              parent::__construct();
              self::$conn = parent::$conn;
              if (self::$conn) {
                 self::$connected = TRUE;
-                self::$id_user = $id_user;
-                if (! is_null($tp_user)) {
-                    self::$cs_sistema = in_array($tp_user, array('Sistema', 'Administrador', 'Gestor'));
+                if (! is_null($id_user)) {
+                    self::$id_user = $id_user;
+                    if (! is_null($tp_user)) {
+                        self::$cs_sistema = in_array($tp_user, array('Sistema', 'Administrador', 'Gestor'));
+                    } else {
+                        self::$cs_sistema = $this->isAdmin($id_user);
+                    }
+                    if (self::$cs_sistema) {
+                        $cmd = "SELECT * FROM tbusers";
+                        $result = json_decode($this->dbquery($cmd));
+                    } else {
+                        $cmd = "SELECT * FROM tbusers WHERE id_user=?";
+                        $result = json_decode($this->dbquery($cmd, $id_user));
+                    }
+                    self::$cursor = array();
+                    if ($result->nrecords > 0) {
+                        self::$cmd = $cmd;
+                        foreach ($result->records as $row) {
+                            $row = get_object_vars($row);
+                            array_push(self::$cursor, $row);
+                        }
+                    } else {
+                        self::$Error='404';
+                        self::$message = 'Nenhum registro encontrado.';
+                    }
                 } else {
-                    self::$cs_sistema = $this->isAdmin($id_user);
-                }
-                if (self::$cs_sistema) {
                     $cmd = "SELECT * FROM tbusers";
                     $result = json_decode($this->dbquery($cmd));
-                } else {
-                    $cmd = "SELECT * FROM tbusers WHERE id_user=?";
-                    $result = json_decode($this->dbquery($cmd, $id_user));
-                }
-                self::$cursor = array();
-                if ($result->nrecords > 0) {
-                    self::$cmd = $cmd;
-                    foreach ($result->records as $row) {
-                        $row = get_object_vars($row);
-                        array_push(self::$cursor, $row);
+                    self::$cursor = array();
+                    if ($result->nrecords > 0) {
+                        self::$cmd = $cmd;
+                        foreach ($result->records as $row) {
+                            $row = get_object_vars($row);
+                            array_push(self::$cursor, $row);
+                        }
+                    } else {
+                        self::$Error='404';
+                        self::$message = 'Nenhum registro encontrado.';
                     }
-                 } else {
-                    self::$Error='404';
-                    self::$message = 'Nenhum registro encontrado.';
-                 }
-             } else {
-                self::$Error='500';
-                self::$message = 'Não foi possível conectar ao banco de dados.';
-             }
+                }
+            } else {
+               self::$Error='500';
+               self::$message = 'Não foi possível conectar ao banco de dados.';
+            }
         }
         public function isAdmin($id_user) {
             $cmd = "SELECT cd_currposition FROM tbusers WHERE id_user=?";
@@ -247,26 +263,6 @@
                 return self::$total;
             }
         }
-
-        public function getNivel($id_user = NULL) {
-            $cs_sistema = NULL;
-            $cs_admin = NULL;
-            $id_area = NULL;
-            $cs_conferente1 = NULL;
-            if (self::$connected) {
-                $result = $this->getCursor($id_user);
-                if ($result['Error'] == '0') {
-                    $data = $result['Data'];
-                    $cs_sistema = $data['cs_sistema'];
-                    $cs_admin = $data['cs_admin'];
-                    $cs_conferente1 = $data['cs_conferente1'];
-                    $id_area = $data['id_area'];
-                }
-                
-            }
-            return array("sistema" => $cs_sistema, "cs_admin" => $cs_admin, "id_area" => $id_area, 'conferente'=> $cs_conferente1);
-        }
-        
         static function getTotalRows($obj) {
             $cmd = self::$cmd;
             $cmd = str_replace("*", " count(*) as total ", $cmd);

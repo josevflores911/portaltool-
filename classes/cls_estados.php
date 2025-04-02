@@ -17,7 +17,7 @@
             {
                 self::$connected=True;
                 if (is_null($sel_dash)) {
-                    $cmd="SELECT * FROM estados ORDER BY Cd_UF";
+                    $cmd="SELECT cd_estado, nm_estado FROM vi_tbagenciasxmunicipios GROUP BY cd_estado ORDER BY cd_estado";
                     $result = json_decode($this->dbquery($cmd));
                     if ($result->nrecords > 0) {
                         self::$estados = [];

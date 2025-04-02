@@ -7,7 +7,7 @@
         static $num_float = NULL;
         public function ConvtoDecimal($string_number) {
             if (! is_null($string_number)) {
-                if (type ($string_number) == "string") {
+                if (gettype ($string_number) == "string") {
                     $aux = explode(",", $string_number);
                     if (count($aux) == 1) { // numero inteiro
                         $num_float = $aux[0];
@@ -24,10 +24,10 @@
                         $num_float = floatval($num_float);
                     } 
 
-                } elseif (type($string_number) == "integer") {
+                } elseif (gettype($string_number) == "integer") {
                     $num_float = strval($string_number) . ".00";
                     $num_float = floatval($num_float);
-                } elseif (type($string_number) == "float") {
+                } elseif (gettype($string_number) == "float") {
                     $num_float = $string_number;
                 }
             } else {
@@ -40,6 +40,7 @@
    trait default_images {
         use getImgageMime;
         static $source       = "#";
+        protected $anexo     = "assets/images/anexos.png";
         protected $log       = "assets/images/log.png";
         protected $logo      = "assets/images/Logo_Tools_1.svg";
         protected $favicon   = "assets/images/Logo_Tools_1.svg";

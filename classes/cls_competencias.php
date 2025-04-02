@@ -9,7 +9,7 @@
         static $connected = FALSE;
         static $Error = '0';
         static $message='';
-        static $ultimo = '';
+        static $ultimo = NULL;
         function __construct($id_user, $tp_user) {
             parent::__construct();
             self::$conn = parent::$conn;
