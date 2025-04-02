@@ -7,6 +7,5 @@
 
     $omuni = new cls_municipios($id_user,$tp_user);
     $result = $omuni->getCursor();
-
     echo json_encode($result);
 ?>

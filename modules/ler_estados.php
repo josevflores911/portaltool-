@@ -4,6 +4,6 @@
     include_once "../classes/cls_estados.php";
     $oEstados = new cls_estados();
     $list_estados = $oEstados->getData();
-    $result = ($list_estados) ?json_encode($list_estados): json_encode(array());
+    $result = ($list_estados) ? json_encode($list_estados): json_encode(array());
     echo $result;
 ?>

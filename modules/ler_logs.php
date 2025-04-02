@@ -3,8 +3,8 @@
     error_reporting(E_ALL);
     include_once "../classes/cls_lerlog.php";
 
-    if (isset($_GET['id_nota'])) {
-        $id_nota = intval($_GET["id_nota"]);
+    if (isset($_GET['id_agencia'])) {
+        $id_nota = intval($_GET["id_agencia"]);
     } else {
         $id_nota = NULL;
     }
