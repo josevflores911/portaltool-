@@ -39,7 +39,6 @@
     <input type="hidden" name="id_user" class="id_user" value="<?php echo $id_user; ?>" />
     <input type="hidden" name="tp_user" class="tp_user" value="<?php echo $tp_user; ?>" />
 
-
     <div class="generic"></div>
     <div class="row">
         <!-- First card with 70% width -->

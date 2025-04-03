@@ -45,6 +45,7 @@
    $last = $oImg->getImageUrl("last")["source"];
    $next = $oImg->getImageUrl("next")["source"];
    $prev = $oImg->getImageUrl("prev")["source"];
+   $waiting = $oImg->getImageUrl("spin")["source"]
 ?>
 <head>
     <meta charset="UTF-8">
@@ -60,7 +61,6 @@
 <input type='hidden' id='id_muni' value='<?php echo $id_muni; ?>'>
 <input type='hidden' id='id_user' value='<?php echo $id_user; ?>'>
 <input type='hidden' id='tp_user' value='<?php echo $tp_user; ?>'>
-
 <!-- Container Offcanvas para a Tela de Recolhimento -->
 <div class="modal fade modal-fullscreen" id="modal-recolhimento" tabindex="-1" data-bs-backdrop="static" aria-hidden="true" data-bs-keyboard="false">
     <div class="modal-dialog">
@@ -70,7 +70,6 @@
                 <button class="btn-close " data-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body bg-white text-dark">
-                <div class="generic-notas"></div>
                 <div class="card card-info-municipio">
                     <div class="card-body" id="info-municipio">
                         <div class="section mt-0 mb-0">
@@ -123,15 +122,12 @@
                             </div>
                         </div>
                         <br style='height:4em;'>
-                        <div class="waiting">
-                            <img src='#' width='32px' id="spin" alt='waiting'>
-                        </div>
                         <div class="section mt-0 mb-0">
                             <div class="row-fluid tableFixHead" id="table-recolhimentos">
-                                <table class="table table-responsive" id="tabela-agencias">
-                                    <thead class="justify-content-between sticky-top bg-darkblue text-white" style="background-color: darkblue; color: #fff;">
+                                <table class="table table-responsive-md gy-0" id="tabela-agencias">
+                                    <thead class="sticky-top bg-darkblue text-white" style="background-color: darkblue; color: #fff;">
                                         <tr scope='row' class='row-fluid' style='max-width:2000px'>
-                                            <th scope='row'></th>
+                                            <th scope='row' style='width:1.4em !important;'></th>
                                             <th scope='col' class='text-center'>Esteira</th>
                                             <th scope='col' class='text-center'>nº agencia</th>
                                             <th scope='col' class='text-center'>CNPJ Original</th>
@@ -150,8 +146,10 @@
                                             <th scope='col' class='text-center'>Total Recolher</th>
                                             <th scope='col' class='text-center'>Elaboração</th>
                                             <th scope='col' class='text-center'>Prot.</th>
+                                            <th scope='col' class='text-center'>&nbsp;</th>
                                             <th scope='col' class='text-center'>Vl Prot.</th>
                                             <th scope='col' class='text-center'>Guia</th>
+                                            <th scope='col' class='text-center'>&nbsp;</th>
                                             <th scope='col' class='text-center'>Vl Guia</th>
                                             <th scope='col' class='text-center'>Correção</th>
                                             <th scope='col' class='text-center'>Divergência</th>
@@ -166,11 +164,11 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                         </tr>
                                     </thead>
-                            
+
                                     <tbody id="tbody-recolhimentos"></tbody>
                                     <tfoot class='sticky-bottom' style='height:19px !important;'>
                                         <tr class='justify-content-around'>
-                                            <td scope='row' colspan='2'>
+                                            <td scope='row' colspan='6'>
                                                 <div class="card card-trasparent ">
                                                     <div class="card-body">
                                                         <img src="<?php echo $first;?>" width='16px' alt='first' id='first'>
@@ -181,7 +179,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td scope='row' colspan='6' >&nbsp;</td>
+                                            <td scope='row' colspan='3' >&nbsp;</td>
                                             <td scope='row' colspan='3' >
                                                 <div class="card bg-transparent float-end" style='float:left; left:-5em;' >
                                                     <div class="card-body">
@@ -197,7 +195,7 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td colspan='21'>&nbsp;</td>
+                                            <td colspan='23'>&nbsp;</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -282,6 +280,9 @@
                       
                     </div>
                 </div>
+                <div class="waiting-recolhimento">
+                    <img src='<?php echo $waiting;?>' width='32px' id="spin" alt='waiting'>
+                </div>
            </div>
            <div class="modal-footer">
                <button type="button" class="btn btn-primary" onclick="salvarContatoAgencia();">Salvar</button>
@@ -289,4 +290,6 @@
            </div>
         </div>
     </div>
+    
+
 </div>
