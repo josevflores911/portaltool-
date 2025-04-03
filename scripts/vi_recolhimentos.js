@@ -12,7 +12,7 @@ $(document).ready((evt) => {
     var tfoot = table.find("tfoot");
     var nrows = getnRows();
 
-    var waiting = $("div.waiting");
+    var waiting = $(".waiting");
     let img_spin = waiting.find("img");
     var parms = {
         id_img: "spin"
@@ -54,7 +54,9 @@ $(document).ready((evt) => {
             // nrows: nrows
         },
         dataType:'json',
-        success: function(response) {
+        success: function (response) {
+            waiting.css("display",'');
+            waiting.css("display",'none');
             var erro = response.Error;
             var message = response.Message;
             var data = JSON.parse(response.Data);

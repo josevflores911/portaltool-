@@ -72,6 +72,9 @@
                                                 <th scope="col">Diverg. Vl</th>
                                             </tr>
                                         </thead>
+                                        <div class="waiting">
+                                            <img src='#' width='32px' id="spin" alt='waiting'>
+                                        </div>
                                         <tbody></tbody>
                                     </table>
                                     <tfoot class='sticky-bottom bg-darkblue' style='display:fixed'>

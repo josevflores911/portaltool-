@@ -34,8 +34,8 @@ $(document).ready(function() {
     let curr_page = tfoot.children().find("input#sel-page").val();
     let btmenu_opt = $(document.querySelectorAll("img[id^='show-']"));
     
-    var waiting = $("div.waiting");
     var generic = $("div.generic");
+    var waiting = $("div.waiting");
 
     let img_spin = waiting.find("img");
     var parms = {

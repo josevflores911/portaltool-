@@ -70,9 +70,6 @@
                 <button class="btn-close " data-dismiss="modal" aria-label="Close"></button>
             </div>
            <div class="modal-body bg-white text-dark">
-                <div class="waiting">
-                     <img src='#' width='32px' id="spin" alt='waiting'>
-                </div>
                 <div class="generic-notas"></div>
                 <div class="card card-info-municipio">
                     <div class="card-body" id="info-municipio">
@@ -126,6 +123,9 @@
                             </div>
                         </div>
                         <br style='height:4em;'>
+                        <div class="waiting">
+                            <img src='#' width='32px' id="spin" alt='waiting'>
+                        </div>
                         <div class="section mt-0 mb-0">
                             <div class="row-fluid tableFixHead" id="table-recolhimentos">
                                 <table class="table table-responsive" id="tabela-agencias">
@@ -166,7 +166,7 @@
                                             <th>&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                         </tr>
                                     </thead>
-
+                            
                                     <tbody id="tbody-recolhimentos"></tbody>
                                     <tfoot class='sticky-bottom' style='height:19px !important;'>
                                         <tr class='justify-content-around'>
