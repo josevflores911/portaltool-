@@ -270,7 +270,7 @@
                                             <label for="te_logs" class="form-label"></label>
                                             <div class="input-group">
                                                 <span class="input-group-text" title="Ocorrências">Movimentações</span>
-                                                a<textarea class="form-control" id="te_logs" rows="12" columns="40"></textarea>
+                                                <textarea class="form-control" id="te_logs" rows="12" columns="40"></textarea>
                                             </div>
                                         </div>
                                     </div>

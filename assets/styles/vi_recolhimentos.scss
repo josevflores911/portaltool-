@@ -14,21 +14,70 @@
     -ms-transform: rotate(90deg);
     transform: rotate(90deg);
 }
-
+.obj_clickable {
+    cursor: pointer !important;
+}
+.obj_clickable:hover {
+    padding-top: 1px;
+    padding-left: 1px;
+}
 .btn-close {
     background-color: transparent;
     font-size:18px;
     color: lavender;
 }
 #table-recolhimentos table {
-    table-layout: auto;
+    display: table block;
+    border-collapse: collapse;
+    flex-grow: 1;
     width: 250vw !important;
+}
+.waiting-recolhimento {
+    position: absolute !important;
+    top: 25.5%;
+    left: 50%;
 }
 #table-recolhimentos thead 
 {
     background-color: darkblue;
     color: white;
     font-weight: bold;
+    th {
+        padding: 0;
+    }
+    th:nth-child(2) {
+        width: 3%;
+    }
+
+
+    th:nth-child(3) {
+        width: 3%;
+    }
+
+    th:nth-child(4) {
+        width: 5%;
+    }
+
+    th:nth-child(5) {
+        width: 3%;
+        text-align: right;
+    }
+
+
+    th:nth-child(8) {
+        width: 3%;
+        text-align: right;
+    }
+
+    th:nth-child(9) {
+        width: 3%;
+        text-align: right;
+    }
+
+    th:nth-child(10) {
+        width: 3%;
+        text-align: right;
+    }
 }
 #table-recolhimentos {
     width: 84.6vw !important;
@@ -36,6 +85,15 @@
     overflow: auto;
     height: 40vh !important;
     max-height: 90vh !important;
+    tbody {
+        td {
+            padding: 0;
+        }
+        td:nth-child(9) {
+            text-align: right;
+            cursor: pointer;
+        }
+    }
 }
 
 .modal-fullscreen .modal-dialog {
@@ -70,4 +128,16 @@
     position: sticky;
     bottom: 0; /* Keeps it at the bottom */
     z-index: 1; /* Ensures it remains above table content */
+}
+
+#table-recolhimentos tbody td {
+    padding: 0;
+}
+
+.generic-recolhimento {
+    display:block;
+    position:relative;
+    top: 15px;
+    left: 15.6px;
+    z-index: 99999;
 }
