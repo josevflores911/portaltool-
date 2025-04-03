@@ -16,8 +16,7 @@ $(document).ready(function (){
                 alert(response.message);
             },
             error: function (response) {
-                console.log("Error" + response);
-                console.log(response);
+                console.error("Error" + response);
             }
         })
     });
@@ -102,7 +101,6 @@ function updateForm(evt) {
         },
 
         success: function (response) {
-            console.log(response);
             var error = response.Error;
             var data = response.Data[0];
             var message = response.Message;
@@ -126,7 +124,6 @@ function updateForm(evt) {
         },
 
         success: function (response) {
-            console.log(response);
             var error = response.Error;
             var data = response.Data[0];
             var message = response.Message;

@@ -5,7 +5,6 @@ $(document).ready((evt) => {
     let vi_generic = $('.generic');
     let table_municipios = $(document.querySelector('.tb_municipios'));
     let vlist_rows = table_municipios.find('tbody').children('tr');
-    console.log(vlist_rows);
     vlist_rows.each(()=> {
         let curr_row = $(this);
         let td_idmuni = curr_row.find('td>nth_child(2');

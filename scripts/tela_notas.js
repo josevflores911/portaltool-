@@ -65,9 +65,7 @@ $(document).ready(function() {
 
     function paginar() {
         var nrows = getnRows();
-        console.log(nrows)
         var npage = getCurrentPage();
-        console.log(npage);
         var nrecords = parseInt($("#total_rec").val());
         waiting_notas.css('display','');
         tbody_notas.html("");

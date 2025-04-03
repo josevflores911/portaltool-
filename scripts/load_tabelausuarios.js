@@ -9,11 +9,9 @@ $(document).ready(function() {
             url: 'modules/ler_tabelausuarios.php',
             type: 'POST',
             success: function(data) {
-                // console.log(data);
                 var resp = JSON.parse(data);
                 var response = resp.Data;
                 var tbodyContent = '';
-                console.log(response[0]);
                 response.forEach(function (item, index) {
                     //error al editar por indice modificar clase para usar user id
                     var row = `
@@ -91,8 +89,6 @@ $(document).ready(function() {
                         var response = resp.Data;
                         if (error == '0' && response.length > 0) {
                             var item = response[0];
-                        
-                            console.log("a", item);
                         
                         }
                     },

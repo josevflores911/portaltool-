@@ -13,8 +13,6 @@ defer(function () {
     var frameWidth = $('.resource-slider-frame').width();
     var itemWidth = $('.resource-slider-item').width();
 
-    //console.log(currentPage + '-' + totalPages);
-
     function doneResizing() {
       var totalScroll = $('.resource-slider-frame').scrollLeft();
       var difference = totalScroll % itemWidth;

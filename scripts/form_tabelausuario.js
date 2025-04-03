@@ -49,7 +49,7 @@ $(document).ready(() => {
                         var response = resp.Data;
                         if (error == '0' && response.length > 0) {
                             var item = response[0];                        
-                            // console.log("a", item);
+                        
                         }
                     },
                     error: function (xhr, status, error) {
@@ -72,8 +72,6 @@ $(document).ready(() => {
         e.stopPropagation();
         
         var index_item = $(".form-login").children("#item").length;
-        console.log("from form buttom",index_item)
-
         $(e.target).val(index_item)
         
         var nuevaDiv = $(`

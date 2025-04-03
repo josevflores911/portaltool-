@@ -261,7 +261,7 @@ $(document).ready(function() {
             error: function(jqXHR, textStatus, errorThrown) {
                 waiting.css("display", "none");
                 waiting.css("display", "block");
-                console.log("Erro ao carregar dados: " + textStatus + ", " + errorThrown);
+                console.error("Erro ao carregar dados: " + textStatus + ", " + errorThrown);
             }
         })
     }
@@ -505,7 +505,6 @@ function showRecolhimento(event) {
                 modalInstance.show();
 
                 modalElement.addEventListener('hidden.bs.modal', function() {
-                    console.log('Modal fechado');
                 });
             } else {
                 console.error('Modal não encontrado após a injeção do HTML.');

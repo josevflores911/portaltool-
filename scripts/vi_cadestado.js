@@ -4,7 +4,6 @@ $(document).ready(function() {
     let form_cadastro = card_body.find("form#formCadastro");
     let sel_estado = form_cadastro.find("#estadoSelect");
     let bt_salvar = $(document.querySelector("button[type='submit']"));
-    console.log(bt_salvar)
 
     $.ajax({
         url: "modules/ler_estados.php",
