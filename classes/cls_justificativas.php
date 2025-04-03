@@ -17,13 +17,11 @@ class cls_justificativas extends cls_connect {
     static $cd_justificativa=NULL;
     static $connected = FALSE;
 
-    function __construct($cd_tipoagencia, $cd_justificativa=NULL) {
+    function __construct() {
         parent::__construct();
         self::$conn = parent::$conn;
         if (self::$conn) {
             self::$connected = TRUE;
-            self::$cd_tipoagencia = $cd_tipoagencia;
-            self::$cd_justificativa = $cd_justificativa;
         } else {
             self::$connected = FALSE;
             self::$Error = '504';

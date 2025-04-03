@@ -17,7 +17,7 @@ class cls_tipostributos extends cls_connect {
     static $cd_contacontabila=NULL;
     static $connected = FALSE;
 
-    function __construct($cd_tptributo) {
+    function __construct($cd_tptributo=NULL) {
         parent::__construct();
         self::$conn = parent::$conn;
         if (self::$conn) {
@@ -30,11 +30,19 @@ class cls_tipostributos extends cls_connect {
         }
     }
 
-    public function getCursor() {
+    public function getCursor($cd_tipTributo=NULL) {
         $vetDados = array();
         if (self::$connected) {
-            $sql = "SELECT cd_contacontabil FROM tb_tipostributos WHERE tp_tributo=?";
-            $result =json_decode($this->dbquery($sql,self::$cd_tptributo));
+            if (is_null($cd_tipTributo)) {
+                $cd_tipTributo = self::$cd_tptributo;
+            }
+            if ($cd_tipTributo) {
+                $sql = "SELECT * FROM tb_tipostributos WHERE tp_tributo=?";
+                $result =json_decode($this->dbquery($sql,$cd_tipTributo));
+            } else {
+                $sql = "SELECT * FROM tb_tipostributos";
+                $result =json_decode($this->dbquery($sql));
+            }
             if ($result->nrecords > 0) {
                 foreach ($result->records as $row) {
                     $row = get_object_vars($row);
