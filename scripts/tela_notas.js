@@ -1,9 +1,10 @@
 $(document).ready(function() {
     var id_agencia = $(document.querySelector('#id_agencia')).val();
-    var table_notas = $(document.querySelector('#table-notas'));
-    let tbody = table_notas.find('tbody');
-    let tfoot = table_notas.find('tfoot');
-    
+    var dt_compet = $(document.querySelector('#dt_compet')).val();
+    var table_notas = $(document.querySelector('.table-notas'));
+    let tbody_notas = table_notas.find('tbody');
+    let tfoot_notas = table_notas.find('tfoot');
+    let waiting_notas = $('.waiting-notas');
     /*
         pega a página corrente
     */
@@ -30,13 +31,13 @@ $(document).ready(function() {
         retorna o numero de linhas da tela
     */
     function getnRows() {
-        let sel_linhas = tfoot.children().find("#sel-linhas > option:selected");
+        let sel_linhas = tfoot_notas.children().find("#sel-linhas > option:selected");
         nrows = sel_linhas.val();
         nrows = parseInt(nrows);
         return nrows;
     }
 
-    tfoot.children().find('img').on("click",(evt) => {
+    tfoot_notas.children().find('img').on("click",(evt) => {
         var id = $(evt.target).attr("id");
         var npage = getCurrentPage();
         if (id == "first" && npage != 1) {
@@ -62,5 +63,42 @@ $(document).ready(function() {
         }
     });
 
+    function paginar() {
+        var nrows = getnRows();
+        console.log(nrows)
+        var npage = getCurrentPage();
+        console.log(npage);
+        var nrecords = parseInt($("#total_rec").val());
+        waiting_notas.css('display','');
+        tbody_notas.html("");
+        $.ajax({
+            url: "modules/ler_notas.php",
+            method: "POST",
+            data: {
+                id_agencia: parseInt(id_agencia),
+                dt_compet: dt_compet.split('/').reverse().join('-'),
+                page: npage,
+                rows: nrows
+            },
+            success: function(response) {
+                var resp = JSON.parse(response);
+                var error = resp.Error;
+                var data = JSON.parse(resp.Data);
+                if (error === '0' ) {
+                    waiting_notas.css('display','none');
+                    data.forEach((elem,ix) => {
+                        var obj_row = $(elem);
+                        tbody_notas.append(obj_row);
+                    });
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                console.error("AJAX error: " + error);
+            }
 
+        });
+    }
+
+    paginar();
 });

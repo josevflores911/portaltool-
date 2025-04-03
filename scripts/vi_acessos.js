@@ -34,8 +34,8 @@ $(document).ready(function() {
     let curr_page = tfoot.children().find("input#sel-page").val();
     let btmenu_opt = $(document.querySelectorAll("img[id^='show-']"));
     
-    var generic = $("div.generic");
     var waiting = $("div.waiting");
+    var generic = $("div.generic");
 
     let img_spin = waiting.find("img");
     var parms = {
@@ -492,11 +492,11 @@ function showRecolhimento(event) {
         type: 'POST',
         data: payload,
         success: function(data) {
+            $(vi_generic).html('');
             let modalExistente = $('#modal-recolhimento');
             if(modalExistente.length) {
                 modalExistente.remove();
             }
-            
             $(vi_generic).html(data);
     
             let modalElement = document.getElementById('modal-recolhimento');
