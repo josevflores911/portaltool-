@@ -184,7 +184,7 @@
             $sline .= "<td scope='col' class='text-end'><label class='form-control-label text-dark'>" . number_format($vl_base_calculo,2,',','.') . "</label></td>";
 
             // $sline .= "<td scope='col' class='text-end'><label id='prueba' onclick='prueba($event);' class='form-control-label text-dark'>" . number_format($vl_base_calculo,2,',','.') . "</abel></td>";
-            $sline .= "<td scope='col' class='text-end'><label id='valorBase' class='form-control-label text-dark' data-user-id='123'>" . number_format($vl_base_calculo, 2, ',', '.') . "</label></td>";
+            $sline .= "<td scope='col' class='text-end'><label id='valorBase' class='form-control-label text-dark'>" . number_format($vl_base_calculo, 2, ',', '.') . "</label></td>";
 
             $sline .= "<td scope='col' class='text-end'><label class='form-control-label text-dark'>" . number_format($vl_iss_db,2,',','.') . "</label></td>";
             $sline .= "<td scope='col' class='text-end'><input type='text' class='form-control input-sm' value='" . number_format($vl_juros,2,',','.') . "' id = 'vl_iss-$id_agencia'></td>";

@@ -61,7 +61,6 @@
 <input type='hidden' id='id_user' value='<?php echo $id_user; ?>'>
 <input type='hidden' id='tp_user' value='<?php echo $tp_user; ?>'>
 
-<div class="modal"></div>
 <!-- Container Offcanvas para a Tela de Recolhimento -->
 <div class="modal fade modal-fullscreen" id="modal-recolhimento" tabindex="-1" data-bs-backdrop="static" aria-hidden="true" data-bs-keyboard="false">
     <div class="modal-dialog">
@@ -74,6 +73,7 @@
                 <div class="waiting">
                      <img src='#' width='32px' id="spin" alt='waiting'>
                 </div>
+                <div class="generic-notas"></div>
                 <div class="card card-info-municipio">
                     <div class="card-body" id="info-municipio">
                         <div class="section mt-0 mb-0">

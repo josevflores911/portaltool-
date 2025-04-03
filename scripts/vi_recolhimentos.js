@@ -105,24 +105,40 @@ $(document).ready((evt) => {
 
 
 
-
+    let div_continner = $('.generic-notas');
     $(document).on("click", "#valorBase", function(e) {
         e.preventDefault();
         e.stopPropagation();
-    
-
-        console.log("hello", e.target.dataset.userId);
-
+        
+        // let div_cont = $('.generic');
         
         $.post('views/tela_notas.php', function (data) { 
-        
+            div_continner.html('');
+            div_continner.html(data)
             let modal = $(".modal");
-            modal.html(data)
-
             modal.modal('show');
         });
         
     });
-    
+
+    // close modal
+    $(document).on("click", "#btn-closenotas", function (e) {     
+        // $('.modal:first').modal('hide');
+        // let modalExistente = $('#modal-recolhimento');
+            // let backdrop = $('.modal-backdrop');
+
+            // if(modalExistente.length) {
+            //     modalExistente.remove();
+            // Remove the modal backdrop
+            //     if (backdrop.length) {
+            //         backdrop.remove();
+            //     }
+                
+        // }
+        // div_continner.html('')
+        $('.modal').modal('hide');
+    })
+    // data-user-id='123'
+    // console.log("hello", e.target.dataset.userId);
     
 });

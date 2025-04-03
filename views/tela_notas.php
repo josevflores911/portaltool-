@@ -30,13 +30,19 @@
     <script src="scripts/tela_notas.js?v=1.10"></script>
 <head>
     <input type="hidden" id="id_agencia" value="<?php echo $id_agencia; ?>" />
-    class="modal fade" id="modal-notas" tabindex="-5" aria-labelledby="modalNotaLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
+    
+    <div class="modal fade" id="modal-notas" tabindex="-5" aria-labelledby="modalNotaLabel" data-bs-backdrop="static" data-bs-keyboard="false" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
-            <div class="modal-header" >
+    
+    <div class="modal-content">
+        
+        <div class="modal-header" >
                 <h5 class="modal-title text-white text-center" id="modalNotasLabel">Notas Tomadas</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <!-- <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button> -->
+                <button class="btn-close " id="btn-closenotas" data-dismiss="modal" aria-label="Close"></button>
             </div>
+
+
             <div class="modal-body">
                 <div class="container-fluid align-items-center p-0">
                     <div class="container-fluid p-0">
@@ -95,6 +101,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>
