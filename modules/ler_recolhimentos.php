@@ -168,14 +168,14 @@
             $nu_ccm = $row['nu_ccm'] ?? 'Não informado';
             $cd_uniorg_sap = $row['cd_uniorg_sap'] ?? '';
             $cd_uniorg_iss = $row['cd_uniorg_iss'] ?? '';
-            $nm_contato = $row['nm_contato'] ?? '';
-            $te_email = $row['te_email'] ?? '';
-            $nu_ddd = $row['nu_ddd'] ?? '';
-            $nu_telefone = $row['nu_telefone'] ?? '';
-            $nm_contato_suporte = $row['nm_contato_suporte'] ?? '';
-            $te_email_suporte = $row['te_email_suporte'] ?? '';
-            $nu_ddd_suporte = $row['nu_ddd_suporte'] ?? '';
-            $nu_telefone_suporte = $row['nu_telefone_suporte'] ?? '';
+            $nm_contato = $row['nm_contato'] ?? '';//--------------------
+            $te_email = $row['te_email'] ?? '';//----------------------------
+            $nu_ddd = $row['nu_ddd'] ?? '';//-----------------------------
+            $nu_telefone = $row['nu_telefone'] ?? '';//--------------------------
+            $nm_contato_suporte = $row['nm_contato_suporte'] ?? '';//--------------------
+            $te_email_suporte = $row['te_email_suporte'] ?? '';//-------------------
+            $nu_ddd_suporte = $row['nu_ddd_suporte'] ?? '';//-------------------
+            $nu_telefone_suporte = $row['nu_telefone_suporte'] ?? '';//-------------------
             $cd_tributo = $row['cd_tributo'] ?? '';
             $te_tributo = $row['te_tributo'] ?? ' -*- ';
             $tp_tributo = $row['tp_tributo'] ?? '';
@@ -187,8 +187,8 @@
 
             $sprime_line = "data-id_recolhimento='$id_recolhimento' data-id_sistema='$id_sistema' data-id_agencia='$id_agencia' data-id_agenciaxmunicipio='$id_agenciaxmunicipio' data-id_obrigacaoacessoria='$id_obrigacaoacessoria' data-id_tributo='$id_tributo' data-id_justificativa='$id_justificativa' data-id_tp_tribut='$id_tp_tribut' data-id_elaborador='$id_elaborador' data-id_aprovador='$id_aprovador' data-id_muni='$id_muni' data-id_divergencia='$id_divergencia'";
             // $sline = "<tr scope='row' class='d-inline-flex' $sprime_line>";
-            $sline = "<tr scope='row' class='gy-0' >";
-            $sline .= "<td scope='col'><input type='radio' name='sel_agencia' id='sel_agencia-$id_agencia' value='$id_agencia'></td>";
+            $sline = "<tr scope='row' class='gy-0 headitem' $sprime_line>";
+            $sline .= "<td scope='col'><input type='radio' class='item' name='sel_agencia' id='sel_agencia-$id_agencia' value='$id_agencia'></td>";//------------
             $sline .= "<td scope='col' class='align-items-left'>";
             $cmd = "<select name='sel_status_atual' id='sel_statusatual-$id_agencia' class='form-select bg-transparent text-dark'>";
             foreach ($vlist_esteiras as $row_esteira) {

@@ -469,6 +469,7 @@ $(document).ready(function() {
 
 
 function showRecolhimento(event) {
+    console.log(event.target)
     var div_filtros = $(document.querySelector(".card-body.filtros"));
     var dt_compet = div_filtros.children().find("#sel_competencias > option:selected").val();
     let id_user = $(document.querySelector(".id_user")).val();
@@ -486,12 +487,33 @@ function showRecolhimento(event) {
         dt_compet: dt_compet,
         nm_muni: nm_muni    
     }    
+    
 
     $.ajax({
         url: 'views/vi_recolhimento.php',
         type: 'POST',
         data: payload,
-        success: function(data) {
+        success: function (data) {
+
+            //console.log("html", data)
+            
+            buscarUser(payload.id_muni).then((user) => {
+                console.log("promise", user)
+                
+                // setTimeout(function () {
+                //     console.log("start")
+                //     let inputNome = $('#nm_contato');
+                //     console.log('test',inputNome.val(user.nome_usuario))
+                //     let inputEmail = $('#te_email');
+                //     console.log('test',inputEmail.val(user.email_usuario))
+                //     let inputNick = $('#nm_nickname-sup');
+                //     console.log('test',inputNick.val(user.codigo_usuario))
+                //     let inputPass = $('#te_password-sup');
+                //     console.log('test',inputPass.val(user.senha))
+                //     console.log("end")
+                // },1000)
+            })
+
             $(vi_generic).html('');
             let modalExistente = $('#modal-recolhimento');
             if(modalExistente.length) {
@@ -515,5 +537,28 @@ function showRecolhimento(event) {
             console.error('Erro ao carregar o modal:', error);
         }
     });
+
+    function buscarUser(userId) {
+        return new Promise((response, reject) => {
+            $.ajax({
+                url: 'modules/ler_userbyid.php',
+                type: 'POST',
+                data: { id_user: userId },
+                success: function (data) {
+                    var resp = JSON.parse(data);
+                    var error = resp.Error;
+                    var value = resp.Data[0];
+                    
+                    response(value);                 
+                       
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    reject(error);
+                }
+            });
+            
+        })
+    }
 }
 

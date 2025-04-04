@@ -137,6 +137,68 @@ $(document).ready((evt) => {
         }
     });
 
+    $(document).on("change", "#tbody-recolhimentos", function () {
+        //need to be state
+        var table = $(this);
+        
+        var inputSelected = $(".item")
+        var headTable_idagencia = $(".headitem").data('id_agencia')
+        var headTable_idsistema = $(".headitem").data('id_sistema')      
+       
+        // console.log("alo", headTable_idagencia + '---' + headTable_idsistema)
+        
+        let payload = {
+            id_agencia: headTable_idagencia, 
+            id_sistem: headTable_idsistema
+        }    
+        
+    
+        $.ajax({
+            url: 'modules/ler_agenxmuni.php',
+            type: 'POST',
+            data: payload,
+            success: function (data) {
+                var resp = JSON.parse(data);
+                var error = resp.Error;
+                var response = resp.Data;
+
+                console.log("a",response)
+                if (response.length > 0) { 
+                    console.log("b",response[0].nm_contato)
+
+                    let nm_contato=response[0].nm_contato ?? 'por preencher'
+                    let te_email=response[0].te_email ?? 'por preencher'
+                    let nu_telefone=response[0].nu_ddd && response[0].nu_telefone ? response[0].nu_ddd+'-'+response[0].nu_telefone: 'por preencher'
+                    
+                    let nm_contato_suporte = response[0].nm_contato_suporte ?? 'por preencher'
+                    let te_email_suporte=response[0].te_email_suporte ?? 'por preencher'
+                    let nu_telefone_suporte= response[0].nu_ddd_suporte && response[0].nu_telefone_suporte ?response[0].nu_ddd_suporte+'-'+response[0].nu_telefone_suporte : 'por preencher'
+
+                    $('#nm_contato').val(nm_contato);
+                    $('#te_email').val(te_email);
+                    $('#te_telefone').val(nu_telefone);
+    
+                    $('#nm_contato-sup').val(nm_contato_suporte);
+                    $('#te_email-sup').val(te_email_suporte);
+                    $('#te_telefone-sup').val(nu_telefone_suporte);
+
+                } else {
+                    console.error(error);
+                }
+
+               
+
+               
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                console.error('Erro ao carregar o modal:', error);
+            }
+        });
+        
+    });
+
+
     /*
         retorna o numero de linhas da tela
     */
