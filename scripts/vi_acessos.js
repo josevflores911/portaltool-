@@ -465,6 +465,70 @@ $(document).ready(function() {
     isTbodyLoaded('tbody_municipios', getnRows(), function() {
         loadScriptOnce('scripts/load_virecolhimentos.js');
     });
+
+
+    //J
+    $(document).on("change", "#tbody-recolhimentos", function () {
+        //need to be state
+        var table = $(this);
+        
+        var inputSelected = $(".item")
+        var headTable_idagencia = $(".headitem").data('id_agencia')
+        var headTable_idsistema = $(".headitem").data('id_sistema')      
+       
+        // console.log("alo", headTable_idagencia + '---' + headTable_idsistema)
+        
+        let payload = {
+            id_agencia: headTable_idagencia, 
+            id_sistem: headTable_idsistema
+        }    
+        
+    
+        //J
+        $.ajax({
+            url: 'modules/ler_agenxmuni.php',
+            type: 'POST',
+            data: payload,
+            success: function (data) {
+                var resp = JSON.parse(data);
+                var error = resp.Error;
+                var response = resp.Data;
+    
+                console.log("a",response)
+                if (response.length > 0) { 
+
+                    $('#municipio_link').attr('href', response[0].te_link );
+
+                    console.log("b",response[0].nm_contato)
+    
+                    let nm_contato=response[0].nm_contato ?? 'por preencher'
+                    let te_email=response[0].te_email ?? 'por preencher'
+                    let nu_telefone=response[0].nu_ddd && response[0].nu_telefone ? response[0].nu_ddd+'-'+response[0].nu_telefone: 'por preencher'
+                    
+                    let nm_contato_suporte = response[0].nm_contato_suporte ?? 'por preencher'
+                    let te_email_suporte=response[0].te_email_suporte ?? 'por preencher'
+                    let nu_telefone_suporte= response[0].nu_ddd_suporte && response[0].nu_telefone_suporte ?response[0].nu_ddd_suporte+'-'+response[0].nu_telefone_suporte : 'por preencher'
+    
+                    $('#nm_contato').val(nm_contato);
+                    $('#te_email').val(te_email);
+                    $('#te_telefone').val(nu_telefone);
+    
+                    $('#nm_contato-sup').val(nm_contato_suporte);
+                    $('#te_email-sup').val(te_email_suporte);
+                    $('#te_telefone-sup').val(nu_telefone_suporte);
+    
+                } else {
+                    console.error(error);
+                }
+    
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+                console.error('Erro ao carregar o modal:', error);
+            }
+        });
+        
+    });
 });
 
 
@@ -485,10 +549,10 @@ function showRecolhimento(event) {
         tp_user: tp_user, 
         id_muni: id_muni,
         dt_compet: dt_compet,
-        nm_muni: nm_muni    
+        nm_muni: nm_muni
     }    
     
-
+    //J
     $.ajax({
         url: 'views/vi_recolhimento.php',
         type: 'POST',
@@ -499,19 +563,6 @@ function showRecolhimento(event) {
             
             buscarUser(payload.id_muni).then((user) => {
                 console.log("promise", user)
-                
-                // setTimeout(function () {
-                //     console.log("start")
-                //     let inputNome = $('#nm_contato');
-                //     console.log('test',inputNome.val(user.nome_usuario))
-                //     let inputEmail = $('#te_email');
-                //     console.log('test',inputEmail.val(user.email_usuario))
-                //     let inputNick = $('#nm_nickname-sup');
-                //     console.log('test',inputNick.val(user.codigo_usuario))
-                //     let inputPass = $('#te_password-sup');
-                //     console.log('test',inputPass.val(user.senha))
-                //     console.log("end")
-                // },1000)
             })
 
             $(vi_generic).html('');
@@ -531,6 +582,9 @@ function showRecolhimento(event) {
             } else {
                 console.error('Modal não encontrado após a injeção do HTML.');
             }
+
+
+
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);
@@ -538,6 +592,7 @@ function showRecolhimento(event) {
         }
     });
 
+    //J
     function buscarUser(userId) {
         return new Promise((response, reject) => {
             $.ajax({

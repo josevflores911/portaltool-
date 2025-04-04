@@ -25,7 +25,18 @@
                 self::$connected=TRUE;
                 self::$conn = parent::$conn;
                 
-                $cmd = "   select * from tbagenciasxmunicipios where id_agencia=? and id_sistema=?;";
+                $cmd = "SELECT 
+                            tbsistemas.te_link, 
+                            tbagenciasxmunicipios.*
+                        FROM 
+                            tbsistemas
+                        JOIN 
+                            tbagenciasxmunicipios
+                        ON 
+                            tbsistemas.id_sistema = tbagenciasxmunicipios.id_sistema
+                        WHERE 
+                            tbagenciasxmunicipios.id_agencia = ? 
+                            AND tbagenciasxmunicipios.id_sistema = ?;";
                         
                 $result = json_decode($this->dbquery($cmd,$agencia,$sistema));
             

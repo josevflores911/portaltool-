@@ -406,6 +406,9 @@ $(document).ready((evt) => {
       waiting_recolhimento.css("display", "none")
     },
   })
+    
+ 
+
 
   /*
         retorna o numero de linhas da tela

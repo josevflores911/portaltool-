@@ -75,7 +75,8 @@
                                 <div class="col-3">
                                     <div class="input-group">
                                         <span class="input-group-text bg-transparent border-0 text-white">Município</span>
-                                        <input type="text" class="form-control form-control-sm bg-transparent text-white" id="municipio" value="<?php echo $nm_muni;?>" readonly>
+                                        <!-- <input type="text" class="form-control form-control-sm bg-transparent text-white" id="municipio" value="" readonly> -->
+                                        <a id="municipio_link" target="_blank">Visitar Site</a>
                                     </div>
                                 </div>
 

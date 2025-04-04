@@ -187,7 +187,7 @@
 
             $sprime_line = "data-id_recolhimento='$id_recolhimento' data-id_sistema='$id_sistema' data-id_agencia='$id_agencia' data-id_agenciaxmunicipio='$id_agenciaxmunicipio' data-id_obrigacaoacessoria='$id_obrigacaoacessoria' data-id_tributo='$id_tributo' data-id_justificativa='$id_justificativa' data-id_tp_tribut='$id_tp_tribut' data-id_elaborador='$id_elaborador' data-id_aprovador='$id_aprovador' data-id_muni='$id_muni' data-id_divergencia='$id_divergencia'";
             // $sline = "<tr scope='row' class='d-inline-flex' $sprime_line>";
-            $sline = "<tr scope='row' class='gy-0' $sprime_line>";
+            $sline = "<tr scope='row' class='gy-0 headitem' $sprime_line>";
             $sline .= "<td scope='col'><input type='radio' name='sel_agencia' id='sel_agencia-$id_agencia' value='$id_agencia' class='form-check-input'></td>";
             $sline .= "<td scope='col' class='align-items-left'>";
             $cmd = "<select name='sel_status_atual' id='sel_statusatual-$id_agencia' class='form-select bg-transparent text-dark'>";
