@@ -29,7 +29,6 @@
    </div>
 </nav>
 <div class="principal">
-    <div style="width:10px;height:10px;background:red;">a</div><!--borrar-->
 </div>
 
 <div class="wrapper">
