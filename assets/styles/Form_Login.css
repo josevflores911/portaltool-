@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("fundo.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.window {
+  width: 350px;
+  height: 220px;
+  text-align: center;
+  border: 1px solid #373a40;
+  border-radius: 20px;
+  backdrop-filter: blur(7px) brightness(63%);
+  box-shadow: #000 0px 48px 100px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Sign {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 20%;
+}
+.image {
+  width: 150%;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  width: 78%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.input-password {
+  position: relative;
+  border-bottom: 2px solid white;
+  margin: 15px 0;
+}
+
+.input-password label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 13px;
+  pointer-events: none;
+  transition: 0.15s ease;
+}
+
+.input-password input {
+  width: 100%;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  color: #fff;
+}
+
+.input-password input:focus ~ label,
+.input-password input:valid ~ label {
+  font-size: 0.8rem;
+  top: 10px;
+  transform: translateY(-120%);
+}
+
+button {
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 80ms ease-in;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  padding: 6px 16px;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+button:hover {
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+button:active {
+  background-color: #edeff2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transform: scale(0.95);
+  transition: none 0s;
+}

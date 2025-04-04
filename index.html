@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Portaltools</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="cache-control" content="max-age=0" />
+	<META HTTP-EQUIV="Expires" CONTENT="-1">
+	<meta http-equiv="Pragma" content="no-cache, no-store">
+	<meta name="version" content="1.0.2"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="assets/images/globalconsult.png" href="assets/images/globalconsult.png" id="favicon"/>
+<!--===============================================================================================-->
+
+   <!-- Font-awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+   <!-- JQUERY -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+   <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.21.1/bootstrap-table.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- Javascript main.js -->
+
+	<style>
+		.container{
+  			height: 100%;
+  			min-height: 100%;
+		}
+		label {
+			background-color: transparent !important;
+			color: white !important;
+			border: none !important;
+		}
+		
+		body {
+			top:0px;
+			left:0px;
+			position: relative;
+			background-color: #030303; 
+			background-image: url('assets/images/fundo_gradiente.webp');
+			background-repeat: no-repeat;
+			background-position: center center top;
+			background-size:cover;
+			width:100%;
+			height: 100%;
+		}
+		body::before {
+			opacity: 0.5; /* Ajuste a opacidade conforme necessário */
+  			z-index: 1;
+		}
+
+
+		html {
+			margin:0;
+			padding: 0;
+  			height: 100%;
+			overflow: hidden;
+		}
+
+		.cursor-wait {
+			cursor: wait;
+		}
+	
+	</style>
+</head>
+<body>
+	<div class="container-fluid h-100 ">
+		<div class="load_pages"></div>
+	</div>
+	<script>
+		$.get("views/form_login.html", (data) => {
+			$("div.load_pages").html("");
+			$("div.load_pages").html(data);
+		})
+	</script>
+</body>

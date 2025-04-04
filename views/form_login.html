@@ -1,0 +1,47 @@
+<head>
+    <link rel="stylesheet" href="assets/styles/form_login.scss">
+    <script src="scripts/main.js?v=1.10"></script>
+    <script src="scripts/tilt.jquery.min.js"></script>
+    <script >
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+</head>
+<div class="row justify-content-center align-items-center rounded-t-5">
+    <div class="card d-flex wd-60">
+        <div class="card-content">
+            <div class="card-header wd-60 bg-transparent">
+                <div class="card-title text-center text-white">Login</div>
+            </div>
+            <div class="card-body d-flex wd-60  bg-transparent">
+                <div class='card-img d-inline-flex js-tilt' data-tilt><img src="assets/images/globalconsult_logo.gif" id='logo' width='200' style="opacity: 0.6;"/>&nbsp;&nbsp;</div>
+                    <form class="card-text form-login" action="" autocomplete="off">
+                        <p style='height:0.08em;'>
+                        <div class="form-group d-inline-flex sm-12">
+                            <label for="usuario">Usuário</label>
+                            <input type="text" class="form-control" size='65' name="usuario" value="" maxlength="80" id="usuario" placeholder="Informe seu usuário no sistema">
+                        </div>
+                        <p style='height:0.08em;'>
+                        <div class="form-group d-inline-flex sm-8">
+                            <label for="senha">Senha</label>
+                            <input type="password" class="form-control" readonly value="" name="senha" id="senha" size='20' 
+                            maxlength="80" autocomplete="none" onfocus="this.removeAttribute('readonly');this.value='';">
+                        </div>
+                        <p style='height:0.08em;'>
+                    
+                    </form>   
+                </div>
+            </div>
+            <div class="card-footer  bg-transparent" style="height:-4.5em;">
+                <div class="form-group">
+                    <label class="message justify-content-center text-white float-start" style="white-space: nowrap;"></label>
+                </div>
+                <div class="form-group waiting"><img src='assets/images/spin-wait.gif' id="spin" width='32px' alt='waiting'></div>
+                <div class="form-group">
+                    <Buttom type="button" id="btenviar" class="btn-primary float-end cursor-pointer">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

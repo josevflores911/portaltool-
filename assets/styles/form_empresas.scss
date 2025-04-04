@@ -1,0 +1,28 @@
+img {
+    cursor: pointer;
+}
+
+label {
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+}
+
+.correios_api {
+    width: 6.75rem;
+    height: 2.4rem;
+    font-size: 12px;
+    color: white;
+    border: none;
+}
+
+.modal#form_empresas{
+    height: 65vh;
+    width: 90vw;
+}
+
+.modal-body {
+    height: 60vh;
+    max-height: 600px;
+}
+

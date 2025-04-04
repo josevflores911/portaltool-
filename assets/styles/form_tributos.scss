@@ -1,0 +1,311 @@
+.card-body {
+    position: relative;
+    overflow: auto;
+    min-width: 50%;
+    height: 45em;
+    background-color: rgba(124,124,144,0.5);
+}
+
+.close {
+    display: block;
+    position: relative;
+    float: right;
+    color: white !important;
+
+}
+.divRow
+{
+   display:table-row;
+   width:auto;
+}
+
+.divCell
+{
+    float:left;/*fix for  buggy browsers*/
+    display:table-column;
+    color:#000;
+}
+
+button#bt_corrigir {
+    position: static;
+    float:right;
+    height: 1.8rem;
+    width: 90px;
+    font-size: 9px;
+    font-weight: bold;
+    margin-right: 0.5em;
+    padding: 0.04em;
+}
+
+button#bt_addservico {
+    position: static;
+    float:right;
+    height: 1.8rem;
+    width: 90px;
+    font-size: 9px;
+    font-weight: bold;
+    margin-right: 0.5em;
+    padding: 0.04em;
+}
+
+.divTable
+{
+    display:  table;
+    position: relative;
+    top: 0px;
+    width:auto;
+    height: auto;
+    background-color:#eee;
+    border-collapse: separate;
+    border-spacing:3px;
+    padding: 0;
+    margin: 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 0.75rem;
+}
+
+.tab-content {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: flex-start;
+}
+
+.label-tributos {
+    font-family: Verdana;
+    font-size: 10px;
+    color: #000;
+    float: left;
+}
+
+input{
+    font-family: Verdana;
+    font-size: 10px;
+    left: 0.5em;
+    height: 1.3rem;
+    border-radius: 2px;
+}
+
+textarea {
+    font-family: Verdana;
+    font-size: 10px;
+    border-radius: 2px;
+}
+
+.col-1 {
+    position: relative;
+    width: 25%;
+    text-align: left;
+    left: 0px;
+}
+.col-2 {
+    position: relative;
+    text-align:left;
+    width: 75%;
+    left: 0px;
+}
+
+.col-3 {
+    position: relative;
+    text-align:left;
+    width: 35%;
+    left: 40%;
+    top: -2.3em;
+}
+.col-4 {
+    position: relative;
+    text-align:left;
+    width: 30%;
+    left: 25%;
+    top: -2.25em;
+    float: left;
+}
+
+.col-5 {
+    position: relative;
+    text-align:left;
+    width: 30%;
+    left: 5%;
+    top:-2em;
+    float: left;
+}
+
+.col-6 {
+    position: relative;
+    text-align:left;
+    width: 30%;
+    left: 60%;
+    top: -2.25em;
+    float: left;
+}
+
+.label-cssimples {
+    position: relative;
+    float: left;
+    font-style: oblique;
+    margin-right: 0.5em;
+    left: 0.3em;
+    top: 0.5em;
+}
+
+.label-csisento {
+    position: relative;
+    float: right;
+    left:-4.5em;
+    font-style: oblique;
+    top: 0.5em;
+}
+
+#message {
+    font-family: Verdana;
+    font-size: 10px;
+    font-style: italic;
+    color: red;
+}
+
+#validar {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    font-family: Verdana;
+    font-size: 12px;
+    float: right;
+    height: 1.8rem;
+    width: 4.5rem;
+    text-align: center;
+    align-items: center;
+}
+
+#resetar {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    font-family: Verdana;
+    font-size: 12px;
+    float: right;
+    height: 1.8rem;
+    width: 4.5rem;
+    margin-right: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+#gravar {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    font-family: Verdana;
+    font-size: 12px;
+    float: right;
+    height: 1.8rem;
+    width: 4.5rem;
+    margin-right: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+#enviar_msg {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    font-family: Verdana;
+    font-size: 12px;
+    float: right;
+    height: 1.8rem;
+    width: 4.5rem;
+    margin-right: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+#gravar_anexo {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    font-family: Verdana;
+    font-size: 12px;
+    float: right;
+    height: 1.8rem;
+    width: 4.5rem;
+    margin-right: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+#gravar_notificacao {
+    position: relative;
+    font-family: Verdana;
+    font-size: 10px;
+    float: right;
+    height: 1.5rem;
+    width: 4em;
+    margin-right: 5px;
+    text-align: center;
+    align-items: center;
+}
+
+#add_anexo {
+    position: relative;
+    font-family: Verdana;
+    font-size: 9px;
+    font-weight: bold;
+    float: right;
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align:center;
+}
+
+.notes {
+    background-attachment: local;
+    background-image:
+        linear-gradient(to right, white 10px, transparent 10px),
+        linear-gradient(to left, white 10px, transparent 10px),
+        repeating-linear-gradient(white, white 30px, #ccc 30px, #ccc 31px, white 31px);
+    line-height: 31px;
+    padding: 8px 10px;
+}
+
+#text-obs {
+    display: flex;
+    position: relative;
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow:-moz-scrollbars-vertical;
+    overflow:-moz-scrollbars-horizontal;
+    white-space: pre; 
+    width: 22.85rem;
+    height: 17.5rem;
+    max-height: 22rem;
+}
+
+#del_anexo {
+    position: relative;
+    font-family: Verdana;
+    font-size: 9px;
+    float: right;
+    font-weight: bold;
+    height: 24px;
+    width: 24px;
+    margin-right: 5px;
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align:center;
+}
+
+#load_anexo {
+    position: relative;
+    font-family: Verdana;
+    font-size: 9px;
+    float: right;
+    font-weight: bold;
+    height: 12px;
+    width: 28px;
+    text-align: center;
+    vertical-align:center;
+}

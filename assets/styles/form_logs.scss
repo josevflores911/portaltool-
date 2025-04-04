@@ -1,0 +1,41 @@
+@import "vi_padrao.scss";
+
+.waiting-log {
+    display:block;
+    position:absolute;
+    top: 22.5rem;
+    left:32rem;
+    z-index: 2000;
+}
+
+small-2 {
+    @extend .small;
+    font-size:15px;
+}
+table.tb-log {
+    width: 100%;
+    max-height: 80vh;
+}
+
+table.tb-log>tbody {
+    height:fit-content;
+    max-height: 80vh;
+}
+table.tb-log>thead {
+    position:sticky;
+    top: -0.75em;
+    height: 1.8rem;
+    background-color: rgb(49, 49, 49);
+    overflow:hidden;
+}
+table.tb-log>tfoot {
+    position:sticky;
+    bottom: -0.8em;
+    overflow:hidden;
+}
+.modal-body {
+    max-height: 80vh; 
+    overflow-y: auto;
+    overflow-x:hidden;
+    
+}
