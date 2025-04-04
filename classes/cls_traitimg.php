@@ -49,8 +49,8 @@
         protected $bt_menu   = "assets/images/btmenu_opt.png";
         protected $first     = "assets/images/first.png";
         protected $prev      = "assets/images/prev.png";
-        protected $next      = "assets/images/prev.png";
-        protected $last      = "assets/images/first.png";
+        protected $next      = "assets/images/btmenu_opt.png";
+        protected $last      = "assets/images/last.png";
         protected $check_on  = "assets/images/check_on.png";
         protected $check_off = "assets/images/check_off.png";
         protected $radio_on  = "assets/images/checked.png";

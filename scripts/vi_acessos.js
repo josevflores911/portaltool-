@@ -578,13 +578,21 @@ function showRecolhimento(event) {
                 modalInstance.show();
 
                 modalElement.addEventListener('hidden.bs.modal', function() {
+                    /* modificação para limpeza da div */
+                    $(".modal-backdrop").remove()
+                    $("body").removeClass(".modal-page")
+                    $("body").removeClass(".modal-open")
+                    $("body").removeClass(".modal-show")
+                    $("body").removeClass(".modal-dialog-scrollable")
+                    $("body").removeClass(".modal-dialog-centered")
+                    $("body").removeClass(".modal-static")
+                    $("body").removeClass(".modal-dialog-centered")
+                    $("body").css("padding", 0)
+                    $(vi_generic).html('');
                 });
             } else {
                 console.error('Modal não encontrado após a injeção do HTML.');
             }
-
-
-
         },
         error: function(xhr, status, error) {
             console.log(xhr.responseText);

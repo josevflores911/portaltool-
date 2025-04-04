@@ -1,0 +1,36 @@
+<head>
+    <!-- scss -->
+    <meta http-equiv="Pragma" content="no-cache, no-store">
+    <meta name="version" content="1.0.3"/>
+    <link rel="stylesheet" href="assets/styles/vi_padrao.scss">
+    <link rel="stylesheet" href="assets/styles/form_anexo.scss">
+    <script src="scripts/form_anexo.js"></script>
+</head>
+<input type="hidden" id="id_anexo">
+<input type="hidden" id="id_user">
+
+<!-- Modal -->
+<div class="modal fade" id="modal_anexo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modal_anexo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="title_anexo">Anexo</h1>
+        <button type="button" class="btn-close bt_anexo" data-toggle="modal" data-target="#modal_anexo" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="input_assunto" class="form-label text-dark">Assunto</label>
+          <textarea type="text" size="30" class="form-control" id="input_assunto" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="te_observacao" class="form-label text-dark">Observações</label>
+          <textarea class="form-control" id="te_observacao" rows='5' cols="40"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Linpar</button>
+        <button type="button" class="btn btn-primary">Anexar</button>
+      </div>
+    </div>
+  </div>
+</div>

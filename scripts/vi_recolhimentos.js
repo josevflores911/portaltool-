@@ -224,6 +224,56 @@ $(document).ready((evt) => {
 
       // Atualiza a informação de paginação
       updatePaginationInfo(ntotal)
+
+      // modal anexo
+
+      vlist_image = $(document.querySelectorAll('img[id^="anexo"]'));
+      vlist_image.each((i, elem) => {
+        var curr_image = $(elem);
+        var id_agencia = curr_image.attr('id').replace(/\D+/,'');
+        var tipo_anexo = curr_image.prop('data-anexo') || curr_image.attr('data-anexo') || curr_image.data('anexo');
+        curr_image.on('click', (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          $.ajax({
+            url: 'views/form_anexo.html', 
+            method: 'GET',
+            success: (data) =>{
+              div_modal.html('');
+              div_modal.append($(data));
+              var button_anexo = $("<button class='bt_anexo' data-toggle='modal' data-target='#modal_anexo' style='display:none;'/>");
+              div_modal.append(button_anexo)
+              setTimeout(() => {
+                div_modal.find('.bt_anexo').trigger('click');
+              }, 300);
+              modal_anexo = div_modal.find('#modal_anexo');
+
+              modal_anexo.on("hidden.bs.modal", (ev) =>{
+                ev.preventDefault()
+                ev.stopPropagation()
+                div_modal.remove(button_anexo)
+                modal_anexo.modal("hide")
+                $(".modal-backdrop").remove()
+                $("body").removeClass(".modal-page")
+                $("body").removeClass(".modal-open")
+                $("body").removeClass(".modal-show")
+                $("body").removeClass(".modal-dialog-scrollable")
+                $("body").removeClass(".modal-dialog-centered")
+                $("body").removeClass(".modal-static")
+                $("body").removeClass(".modal-dialog-centered")
+                $("body").css("padding", 0)
+                div_modal.html("")
+              });
+            },
+            error: (xhr, status, error) => {
+              console.error("Erro ao carregar modal:", error)
+            },
+          });
+        });
+      });
+
+
     } else {
       console.error("Erro ao processar dados:", message)
       waiting_recolhimento.css("display", "none")
@@ -255,6 +305,7 @@ $(document).ready((evt) => {
     if ($("#pagination-info").length) {
       $("#pagination-info").text(`Mostrando ${startRecord}-${endRecord} de ${ntotal}`)
     }
+
   }
 
   // Configura os manipuladores de eventos para a tabela
@@ -352,7 +403,6 @@ $(document).ready((evt) => {
             bt_fechar.on("click", (e) => {
               e.preventDefault()
               e.stopPropagation()
-
               modal_notas.modal("hide")
               $(".modal-backdrop").remove()
               $("body").removeClass(".modal-page")
@@ -407,9 +457,6 @@ $(document).ready((evt) => {
     },
   })
     
- 
-
-
   /*
         retorna o numero de linhas da tela
     */

@@ -41,15 +41,14 @@
 
     <div class="generic"></div>
     <div class="row">
-        <!-- First card with 70% width -->
         <div class="col-md-7" style="width:70%;">
-            <div class="card card-transparent float-left rounded-2" style='margin: 0; padding:1; box-sizing: border-box;'>
+            <div class="card card-trasparent float-left rounded-2" style='margin: 0; padding:1; box-sizing: border-box;'>
                 <div class="card-body filtros">
                     <div class="d-flex justify-content-between gap-3">
-                        <select class="form-select-sm-5" id="sel_competencias" style="width:20vw;"></select>
-                        <select class="form-select-sm-8" id="sel_municipios" style="width:35vw;"></select>
-                        <select class="form-select-sm-6" id="sel_statusmuni" style="width:35vw;"></select>
-                        <select class="form-select-sm-5" id="sel_users" style="width:32vw;"></select>
+                        <select class="form-control form-select-sm-5" id="sel_competencias" style="width:20vw;"></select>
+                        <select class="form-control form-select-sm-8" id="sel_municipios" style="width:35vw;"></select>
+                        <select class="form-control form-select-sm-6" id="sel_statusmuni" style="width:35vw;"></select>
+                        <select class="form-control form-select-sm-5" id="sel_users" style="width:32vw;"></select>
                         <button class="form-control bg-primary text-white fn-bold" id="bt_filter" style='width:15vw !important;'>Filtrar</button>
                     </div>
                 </div>
@@ -58,10 +57,10 @@
 
         <!-- Second card with 30% width -->
         <div class="col-md-4" style="width:30%;">
-            <div class="card card-transparent">
+            <div class="card card-trasparent">
                 <div class="card-body">
-                    <label class='bg-white text-dark' for="total_rec">Total de registros:</label>
-                    <input type="text" class="bg-white text-dark text-center  border-1 rounded" size="6" id="total_rec" name="total_rec" readonly>
+                    <label class='form-control bg-dark text-white' for="total_rec">Total de registros:</label>
+                    <input type="text" class="form-control bg-dark text-white text-center border-1 rounded" size="6" id="total_rec" name="total_rec" readonly>
                 </div>
             </div>
         </div>
